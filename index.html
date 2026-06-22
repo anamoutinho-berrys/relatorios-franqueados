@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -230,12 +231,15 @@ async function fetchAll(acc, preset) {
     }),
     gql(`${act}/insights`, {
       level:'ad', fields:'ad_id,ad_name,spend,reach,impressions,clicks',
-      date_preset:preset, sort:'["reach_descending"]', limit:5
+      date_preset:preset, limit:20
     })
   ]);
 
   const campaigns = (camps.data||[]).filter(c => Number(c.insights?.data?.[0]?.impressions||0) > 1);
-  const rawAds = (adsIns.data||[]).filter(a => Number(a.impressions||0) > 1).slice(0,3);
+  const rawAds = (adsIns.data||[])
+    .filter(a => Number(a.impressions||0) > 1)
+    .sort((a,b) => Number(b.reach||0) - Number(a.reach||0))
+    .slice(0,3);
 
   const topAds = await Promise.all(rawAds.map(async ad => {
     try {
