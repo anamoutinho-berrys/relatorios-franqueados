@@ -6,286 +6,186 @@
 <title>Berry's — Dashboard Meta Ads</title>
 <style>
 :root {
-  --blue:    #1a3c8f;
-  --blue2:   #2d6fd4;
-  --blue3:   #4a90d9;
-  --blight:  #ddeafc;
-  --gray:    #f0f4fb;
-  --text:    #111827;
-  --text2:   #6b7280;
-  --green:   #16a34a;
-  --white:   #ffffff;
+  --navy:  #0d2657;
+  --blue:  #1a3c8f;
+  --blue2: #2558c0;
+  --blue3: #4a90d9;
+  --blight:#ddeafc;
+  --gray:  #f0f4fb;
+  --text:  #111827;
+  --text2: #6b7280;
+  --green: #16a34a;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background: #e8eef8; min-height: 100vh; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #dde6f5; min-height: 100vh; }
 
-/* ── SETUP BAR ── */
 .setup-bar {
-  background: #0f2460;
-  padding: 9px 16px;
+  background: #08173d;
+  padding: 8px 16px;
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
 }
-.setup-bar label { color: #aac4f0; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.setup-bar label { color: #7fa8e0; font-size: 12px; font-weight: 700; white-space: nowrap; }
 .setup-bar input {
   flex: 1; min-width: 180px;
   padding: 6px 12px; border-radius: 8px; border: none;
-  font-size: 13px; background: #1d3a7a; color: white;
+  font-size: 13px; background: #142150; color: white;
 }
-.setup-bar input::placeholder { color: #6b8ccc; }
+.setup-bar input::placeholder { color: #4a6aaa; }
 .setup-bar select {
   padding: 6px 10px; border-radius: 8px; border: none;
-  font-size: 12px; background: #1d3a7a; color: white; cursor: pointer;
+  font-size: 12px; background: #142150; color: white; cursor: pointer;
 }
 .btn-connect {
   background: var(--blue3); color: white; border: none;
-  padding: 6px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer;
+  padding: 6px 18px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer;
 }
-.btn-connect:hover { background: #3a80c9; }
+.btn-connect:hover { background: #3a7fcf; }
 
-/* ── TABS ── */
 .tabs-wrap {
-  background: white;
-  border-bottom: 2px solid #dde8f8;
-  overflow-x: auto; white-space: nowrap; padding: 0 12px;
+  background: white; border-bottom: 2px solid #d8e4f5;
+  overflow-x: auto; white-space: nowrap; padding: 0 14px;
   position: sticky; top: 0; z-index: 10;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
 }
 .tab {
-  display: inline-block;
-  padding: 11px 15px; cursor: pointer;
+  display: inline-block; padding: 11px 15px; cursor: pointer;
   font-size: 12px; font-weight: 500; color: var(--text2);
-  border-bottom: 3px solid transparent;
-  transition: all .15s; user-select: none;
+  border-bottom: 3px solid transparent; transition: all .15s; user-select: none;
 }
 .tab:hover { color: var(--blue); }
 .tab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
 
-/* ── PAGE ── */
-.page { max-width: 430px; margin: 0 auto; padding: 16px 12px 36px; }
+.page { max-width: 440px; margin: 0 auto; padding: 16px 12px 36px; }
 
-/* ── HEADER ── */
 .dash-header {
-  background: linear-gradient(135deg, #1a3c8f 0%, #2558c0 60%, #3a78d8 100%);
-  border-radius: 22px;
-  padding: 24px 20px 20px;
+  background: linear-gradient(145deg, #08173d 0%, #112a72 45%, #1e4db5 100%);
+  border-radius: 24px;
+  padding: 22px 20px 22px;
   margin-bottom: 14px;
   position: relative;
   overflow: hidden;
-  min-height: 190px;
+  min-height: 200px;
 }
-/* snowflakes */
 .dash-header::before {
-  content: '❄ ❄ ❄';
-  position: absolute; top: 12px; right: 110px;
-  color: rgba(255,255,255,.18); font-size: 18px; letter-spacing: 14px;
-  pointer-events: none;
+  content: '❄  ❄  ❄';
+  position: absolute; top: 14px; right: 120px;
+  color: rgba(255,255,255,.15); font-size: 16px; letter-spacing: 8px;
+  pointer-events: none; white-space: nowrap;
 }
 .dash-header::after {
-  content: '❄ ❄';
-  position: absolute; bottom: 22px; right: 130px;
-  color: rgba(255,255,255,.12); font-size: 14px; letter-spacing: 18px;
+  content: '❄   ❄';
+  position: absolute; bottom: 26px; right: 140px;
+  color: rgba(255,255,255,.10); font-size: 12px; letter-spacing: 14px;
   pointer-events: none;
 }
-.header-logo {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+.dash-header .deco-circle {
+  position: absolute; right: -20px; bottom: -30px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,144,217,.25) 0%, transparent 70%);
+  pointer-events: none;
 }
-.header-logo img.brand-logo {
-  height: 36px; filter: brightness(0) invert(1);
+.h-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.h-brand-box {
+  background: white; border-radius: 10px;
+  padding: 5px 10px; display: flex; align-items: center; gap: 6px;
 }
-.brand-text {
-  color: white; font-size: 18px; font-weight: 900; letter-spacing: .5px;
-}
-.brand-text span { color: #7eb8ff; }
-.dash-title {
-  color: white; font-size: 34px; font-weight: 900; line-height: 1;
-  margin-bottom: 2px;
-}
-.dash-subtitle {
-  color: rgba(255,255,255,.75); font-size: 13px; font-weight: 500;
-}
-.dash-unit { color: #7eb8ff; font-weight: 800; }
-.date-row { margin-top: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.h-brand-name { font-size: 14px; font-weight: 900; color: var(--navy); letter-spacing: .5px; line-height: 1; }
+.h-brand-sub { font-size: 8px; color: var(--blue2); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1; }
+.h-title { color: white; font-size: 38px; font-weight: 900; line-height: 1; margin-bottom: 3px; letter-spacing: -.5px; }
+.h-sub { color: rgba(255,255,255,.6); font-size: 13px; font-weight: 500; margin-bottom: 1px; }
+.h-unit { color: #7eb8ff; font-weight: 800; font-size: 15px; }
+.h-pills { margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .date-pill {
   display: inline-flex; align-items: center; gap: 5px;
-  background: rgba(255,255,255,.15); border-radius: 20px;
-  padding: 5px 13px; color: white; font-size: 12px; font-weight: 600;
-  backdrop-filter: blur(4px);
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 20px; padding: 5px 13px;
+  color: rgba(255,255,255,.9); font-size: 12px; font-weight: 600;
 }
 .live-pill {
   display: inline-flex; align-items: center; gap: 5px;
-  background: #e2f7ee; color: var(--green);
-  border-radius: 20px; padding: 4px 11px;
+  background: rgba(22,163,74,.2); border: 1px solid rgba(22,163,74,.4);
+  color: #4ade80; border-radius: 20px; padding: 4px 11px;
   font-size: 11px; font-weight: 700;
 }
-.live-pill .dot {
-  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
-  animation: pulse 1.5s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity: 1; } 50% { opacity: .4; }
-}
-.mascot {
-  position: absolute;
-  right: -6px; bottom: 0;
-  height: 175px;
-  filter: drop-shadow(-4px 4px 12px rgba(0,0,0,.25));
-}
+.live-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: pulse 1.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.mascot { position: absolute; right: -8px; bottom: 0; height: 185px; filter: drop-shadow(-6px 4px 16px rgba(0,0,0,.35)); object-fit: contain; }
 
-/* ── KPI ── */
 .kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
-.kpi-card {
-  background: white; border-radius: 16px;
-  padding: 14px 10px; text-align: center;
-  box-shadow: 0 2px 8px rgba(26,60,143,.08);
-}
-.kpi-icon {
-  width: 36px; height: 36px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 17px; margin: 0 auto 7px;
-}
-.kpi-icon.money  { background: #ddeafc; }
-.kpi-icon.reach  { background: #ddf3e4; }
-.kpi-icon.eye    { background: #e8e0fc; }
+.kpi-card { background: white; border-radius: 18px; padding: 14px 10px; text-align: center; box-shadow: 0 2px 10px rgba(26,60,143,.09); }
+.kpi-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 8px; }
+.ki-money { background: #ddeafc; }
+.ki-reach { background: #d4f0e4; }
+.ki-eye   { background: #ede9fc; }
 .kpi-label { font-size: 10px; color: var(--text2); margin-bottom: 3px; }
-.kpi-value { font-size: 14px; font-weight: 900; color: var(--blue); line-height: 1.1; }
+.kpi-value { font-size: 15px; font-weight: 900; color: var(--navy); }
 
-/* ── SECTION ── */
-.section {
-  background: white; border-radius: 18px;
-  padding: 18px 16px; margin-bottom: 12px;
-  box-shadow: 0 2px 8px rgba(26,60,143,.07);
-}
-.section-title {
-  font-size: 15px; font-weight: 800; color: var(--blue); margin-bottom: 14px;
-  display: flex; align-items: center; gap: 7px;
-}
-.section-title .icon { font-size: 17px; }
+.section { background: white; border-radius: 20px; padding: 18px 16px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(26,60,143,.07); }
+.sec-title { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; gap: 7px; }
 
-/* ── CAMPAIGN ── */
-.camp-item {
-  display: flex; align-items: center; gap: 11px;
-  padding: 10px 0; border-bottom: 1px solid var(--gray);
-}
+.camp-item { display: flex; align-items: flex-start; gap: 11px; padding: 10px 0; border-bottom: 1px solid var(--gray); }
 .camp-item:last-child { border-bottom: none; padding-bottom: 0; }
-.camp-icon {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: var(--blue2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0; color: white;
-}
-.camp-icon.video  { background: #1a3c8f; }
-.camp-icon.reach  { background: #2558c0; }
-.camp-icon.follow { background: #2d6fd4; }
-.camp-icon.conv   { background: #1a8a5e; }
+.camp-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; color: white; }
+.ci-video  { background: linear-gradient(135deg,#1a3c8f,#2d6fd4); }
+.ci-follow { background: linear-gradient(135deg,#2558c0,#3a90e0); }
+.ci-conv   { background: linear-gradient(135deg,#0f7a4e,#16a34a); }
+.ci-reach  { background: linear-gradient(135deg,#7c3aed,#a855f7); }
+.ci-other  { background: linear-gradient(135deg,#1e4db5,#4a90d9); }
 .camp-name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 5px; line-height: 1.3; }
-.camp-metrics {
-  display: flex; gap: 6px; align-items: center;
-  font-size: 11px; color: var(--text2);
-}
+.camp-metrics { display: flex; gap: 5px; align-items: center; font-size: 11px; color: var(--text2); flex-wrap: wrap; }
 .camp-metrics strong { color: var(--text); }
-.sep { color: #ccc; }
+.sep { color: #d1d5db; }
 
-/* ── RESUMO ── */
-.resumo-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 0;
-}
-.meta-logo {
-  width: 40px; height: 40px; border-radius: 12px;
-  background: linear-gradient(135deg, #0668E1, #0090FF);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; flex-shrink: 0; color: white; font-weight: 900;
-}
-.resumo-label { font-size: 11px; color: var(--text2); }
-.resumo-name  { font-size: 13px; font-weight: 700; color: var(--text); }
-.resumo-stats {
-  display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 8px; margin-top: 14px;
-  background: var(--gray); border-radius: 12px; padding: 12px;
-}
-.rs-label { font-size: 9px; color: var(--text2); margin-bottom: 2px; }
-.rs-value { font-size: 13px; font-weight: 800; color: var(--blue); }
+.meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.meta-logo { width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0; background: linear-gradient(135deg,#0668E1,#0090FF); display: flex; align-items: center; justify-content: center; font-size: 22px; color: white; font-weight: 900; }
+.meta-info-label { font-size: 11px; color: var(--text2); }
+.meta-info-name  { font-size: 13px; font-weight: 800; color: var(--text); }
+.resumo-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; background: var(--gray); border-radius: 14px; padding: 13px 10px; }
+.rg-label { font-size: 9px; color: var(--text2); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .5px; }
+.rg-value { font-size: 12px; font-weight: 900; color: var(--navy); }
 
-/* ── BEST ADS ── */
-.ad-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 0; border-bottom: 1px solid var(--gray);
-}
+.ad-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray); }
 .ad-item:last-child { border-bottom: none; padding-bottom: 0; }
-.ad-medal {
-  width: 28px; height: 28px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 12px; flex-shrink: 0;
-}
+.ad-medal { width: 28px; height: 28px; min-width: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 13px; }
 .m1 { background: #ffd700; color: #7a5a00; }
-.m2 { background: #c8c8c8; color: #444; }
+.m2 { background: #c8c8c8; color: #3a3a3a; }
 .m3 { background: #cd7f32; color: white; }
-.ad-thumb {
-  width: 54px; height: 54px; border-radius: 10px;
-  object-fit: cover; flex-shrink: 0; background: var(--gray);
-}
-.ad-thumb-ph {
-  width: 54px; height: 54px; border-radius: 10px;
-  background: var(--blight);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; flex-shrink: 0;
-}
+.ad-thumb { width: 56px; height: 56px; min-width: 56px; border-radius: 12px; object-fit: cover; background: var(--gray); }
+.ad-thumb-ph { width: 56px; height: 56px; min-width: 56px; border-radius: 12px; background: var(--blight); display: flex; align-items: center; justify-content: center; font-size: 24px; }
 .ad-info { flex: 1; min-width: 0; }
-.ad-name {
-  font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 5px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
+.ad-name { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ad-metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 3px; }
-.am-label { font-size: 9px; color: var(--text2); text-decoration: underline; }
-.am-value { font-size: 11px; font-weight: 800; color: var(--text); }
+.am-l { font-size: 9px; color: var(--text2); text-decoration: underline; }
+.am-v { font-size: 11px; font-weight: 800; color: var(--text); }
 
-/* ── INSIGHTS ── */
-.insights-grid {
-  display: grid; grid-template-columns: repeat(2,1fr); gap: 8px;
-}
-.insight-card {
-  background: var(--gray); border-radius: 14px; padding: 12px;
-}
-.ins-icon { font-size: 18px; margin-bottom: 5px; }
+.ins-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+.ins-card { background: var(--gray); border-radius: 14px; padding: 13px 12px; }
+.ins-ico   { font-size: 20px; margin-bottom: 5px; }
 .ins-label { font-size: 10px; color: var(--text2); margin-bottom: 2px; }
-.ins-name  { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 4px;
-             white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ins-value { font-size: 14px; font-weight: 900; color: var(--blue); }
+.ins-name  { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ins-value { font-size: 15px; font-weight: 900; color: var(--navy); }
 
-/* ── EXPORT ── */
-.export-wrap { max-width: 430px; margin: 0 auto; padding: 0 12px 40px; }
-.btn-export {
-  background: var(--blue); color: white; border: none;
-  padding: 14px; border-radius: 14px; font-size: 14px; font-weight: 800;
-  cursor: pointer; width: 100%;
-}
-.btn-export:hover { background: #142f7a; }
+.foot-note { font-size: 10px; color: #aaa; text-align: center; margin-top: 6px; }
+
+.export-wrap { max-width: 440px; margin: 0 auto; padding: 0 12px 44px; }
+.btn-export { background: linear-gradient(135deg, var(--navy), var(--blue2)); color: white; border: none; padding: 15px; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; width: 100%; box-shadow: 0 4px 14px rgba(26,60,143,.3); }
+.btn-export:hover { opacity: .92; }
 .btn-export:disabled { opacity: .5; cursor: default; }
 
-/* ── STATES ── */
-.state-box { text-align: center; padding: 52px 24px; color: var(--text2); }
-.state-box .ico { font-size: 46px; margin-bottom: 14px; }
+.state-box { text-align: center; padding: 56px 24px; color: var(--text2); }
+.state-ico { font-size: 48px; margin-bottom: 14px; }
 .state-box p { font-size: 14px; line-height: 1.7; }
-.spinner {
-  width: 36px; height: 36px;
-  border: 3px solid var(--blight); border-top-color: var(--blue);
-  border-radius: 50%; animation: spin .75s linear infinite;
-  margin: 0 auto 14px;
-}
+.spinner { width: 36px; height: 36px; border: 3px solid var(--blight); border-top-color: var(--blue); border-radius: 50%; animation: spin .75s linear infinite; margin: 0 auto 14px; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.err-box {
-  background: #fdf0f0; border: 1px solid #f5c6c6; border-radius: 12px;
-  padding: 14px; color: #c0392b; font-size: 13px; margin: 12px 0;
-}
-.no-data { color: var(--text2); font-size: 13px; text-align: center; padding: 12px 0; }
+.err-box { background: #fdf0f0; border: 1px solid #f5c6c6; border-radius: 12px; padding: 14px; color: #c0392b; font-size: 13px; margin: 12px 0; }
+.no-data { color: var(--text2); font-size: 13px; text-align: center; padding: 14px 0; }
 </style>
 </head>
 <body>
 
-<!-- Setup -->
 <div class="setup-bar">
-  <label>🔑 Token Meta Ads:</label>
-  <input type="password" id="tokenInput" placeholder="Cole seu Access Token aqui..." />
+  <label>🔑 Access Token:</label>
+  <input type="password" id="tokenInput" placeholder="Cole o token do Meta Ads aqui…" />
   <select id="datePreset" onchange="reloadTab()">
     <option value="this_month">Mês atual</option>
     <option value="last_month">Mês anterior</option>
@@ -296,25 +196,21 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #e8eef8; min-heig
   <button class="btn-connect" onclick="connect()">Conectar</button>
 </div>
 
-<!-- Tabs -->
 <div class="tabs-wrap" id="tabsWrap"></div>
 
-<!-- Dashboard -->
 <div class="page" id="dashPage">
   <div class="state-box">
-    <div class="ico">🔑</div>
-    <p>Cole o <strong>Access Token</strong> da Meta acima<br>e clique em <strong>Conectar</strong> para carregar os dados.</p>
+    <div class="state-ico">🔑</div>
+    <p>Cole o <strong>Access Token</strong> da Meta acima<br>e clique em <strong>Conectar</strong>.</p>
   </div>
 </div>
 
-<!-- Export -->
 <div class="export-wrap" id="exportWrap" style="display:none">
   <button class="btn-export" id="btnExport" onclick="exportImage()">📸 Exportar como imagem</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-// ─── CONTAS ───────────────────────────────────────────────────
 const ACCOUNTS = [
   { id: '980007099641939',   name: 'MOC Avenida' },
   { id: '3407509682745878',  name: 'Maceió' },
@@ -327,14 +223,18 @@ const ACCOUNTS = [
   { id: '898087053113777',   name: 'Pirapora' },
   { id: '718790137924927',   name: 'Conquista' },
   { id: '505755245757325',   name: 'Porto Seguro' },
+  { id: '5326782910767622',  name: 'Uberaba' },
   { id: '1185830483132999',  name: 'Januária' },
   { id: '1675046163715555',  name: 'Salinas' },
   { id: '1512851600567325',  name: 'Contagem' },
+  { id: '988118436916274',   name: 'Janaúba' },
+  { id: '3794589237361601',  name: 'MOC Shopping' },
   { id: '547206184401772',   name: 'Anápolis' },
   { id: '1572310324316523',  name: 'Goiânia Alto da Glória' },
   { id: '930248282851717',   name: 'Lauro de Freitas' },
   { id: '1228370282243542',  name: 'Salvador Rua' },
   { id: '364524186711060',   name: 'Balneário' },
+  { id: '1715718849282094',  name: 'Feira de Santana' },
   { id: '477466964832908',   name: 'Águas Claras' },
   { id: '668267178630065',   name: 'Cuiabá' },
   { id: '3059066484235266',  name: 'Patos de Minas' },
@@ -344,14 +244,12 @@ const ACCOUNTS = [
 ];
 
 const GRAPH = 'https://graph.facebook.com/v20.0';
-let token = '';
-let activeTab = 0;
+let token = '', activeTab = 0;
 const cache = {};
 
-// ─── TABS ─────────────────────────────────────────────────────
 function buildTabs() {
   document.getElementById('tabsWrap').innerHTML =
-    ACCOUNTS.map((a, i) =>
+    ACCOUNTS.map((a,i) =>
       `<div class="tab${i===0?' active':''}" id="tab${i}" onclick="switchTab(${i})">${a.name}</div>`
     ).join('');
 }
@@ -365,7 +263,7 @@ function switchTab(i) {
 
 function connect() {
   token = document.getElementById('tokenInput').value.trim();
-  if (!token) return alert('Cole o Access Token antes de conectar.');
+  if (!token) { alert('Cole o Access Token antes de conectar.'); return; }
   Object.keys(cache).forEach(k => delete cache[k]);
   document.getElementById('exportWrap').style.display = 'block';
   loadData(activeTab);
@@ -376,11 +274,10 @@ function reloadTab() {
   if (token) loadData(activeTab);
 }
 
-// ─── API ──────────────────────────────────────────────────────
-async function gql(path, params = {}) {
+async function gql(path, params={}) {
   const url = new URL(`${GRAPH}/${path}`);
   url.searchParams.set('access_token', token);
-  for (const [k,v] of Object.entries(params)) url.searchParams.set(k, v);
+  for (const [k,v] of Object.entries(params)) url.searchParams.set(k,v);
   const r = await fetch(url);
   const d = await r.json();
   if (d.error) throw new Error(d.error.message);
@@ -395,136 +292,108 @@ async function loadData(idx) {
   try {
     if (!cache[key]) cache[key] = await fetchAll(acc, preset);
     render(acc, cache[key]);
-  } catch(e) {
-    setError(e.message);
-  }
+  } catch(e) { setError(e.message); }
 }
 
 async function fetchAll(acc, preset) {
   const act = `act_${acc.id}`;
   const [totals, camps, adsIns] = await Promise.all([
-    gql(`${act}/insights`, {
-      fields: 'spend,reach,impressions',
-      date_preset: preset
-    }),
+    gql(`${act}/insights`, { fields:'spend,reach,impressions', date_preset:preset }),
     gql(`${act}/campaigns`, {
       effective_status: '["ACTIVE","PAUSED","ARCHIVED","DELETED","IN_PROCESS","WITH_ISSUES"]',
       fields: `name,objective,insights.date_preset(${preset}){spend,reach,impressions}`,
       limit: 30
     }),
     gql(`${act}/insights`, {
-      level: 'ad',
-      fields: 'ad_id,ad_name,spend,reach,impressions,clicks',
-      date_preset: preset,
-      sort: 'reach_descending',
-      limit: 5
+      level:'ad', fields:'ad_id,ad_name,spend,reach,impressions,clicks',
+      date_preset:preset, sort:'reach_descending', limit:5
     })
   ]);
 
-  // Filtra campanhas que veicularam (impressões > 1)
-  const campaigns = (camps.data || []).filter(c => {
-    const imp = Number(c.insights?.data?.[0]?.impressions || 0);
-    return imp > 1;
-  });
+  const campaigns = (camps.data||[]).filter(c => Number(c.insights?.data?.[0]?.impressions||0) > 1);
+  const rawAds = (adsIns.data||[]).filter(a => Number(a.impressions||0) > 1).slice(0,3);
 
-  // Top 3 ads com thumbnail
-  const rawAds = (adsIns.data || []).filter(a => Number(a.impressions||0) > 1).slice(0,3);
   const topAds = await Promise.all(rawAds.map(async ad => {
     try {
-      const d = await gql(ad.ad_id, { fields: 'creative{thumbnail_url,image_url}' });
+      const d = await gql(ad.ad_id, { fields:'creative{thumbnail_url,image_url}' });
       return { ...ad, thumb: d.creative?.thumbnail_url || d.creative?.image_url || null };
-    } catch { return { ...ad, thumb: null }; }
+    } catch { return { ...ad, thumb:null }; }
   }));
 
-  return { summary: totals.data?.[0] || {}, campaigns, topAds };
+  return { summary: totals.data?.[0]||{}, campaigns, topAds };
 }
 
-// ─── FORMATO ──────────────────────────────────────────────────
-const N  = n => n ? Number(n).toLocaleString('pt-BR') : '0';
+const N   = n => n ? Number(n).toLocaleString('pt-BR') : '0';
 const BRL = n => n ? Number(n).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) : 'R$ 0,00';
 
 function dateLabel() {
   const p = document.getElementById('datePreset').value;
-  const d = new Date();
-  const day = d.getDate(), year = d.getFullYear();
-  const month = d.toLocaleString('pt-BR',{month:'long'});
-  return {
-    this_month: `01 a ${day} de ${month} de ${year}`,
-    last_month: 'Mês anterior',
-    last_7d: 'Últimos 7 dias',
-    last_30d: 'Últimos 30 dias',
-    this_year: `Janeiro a ${month} de ${year}`,
-  }[p] || p;
+  const d = new Date(), day=d.getDate(), yr=d.getFullYear();
+  const mo = d.toLocaleString('pt-BR',{month:'long'});
+  return { this_month:`01 a ${day} de ${mo} de ${yr}`, last_month:'Mês anterior',
+           last_7d:'Últimos 7 dias', last_30d:'Últimos 30 dias',
+           this_year:`Janeiro a ${mo} de ${yr}` }[p]||p;
 }
 
 function periodShort() {
   const p = document.getElementById('datePreset').value;
   const d = new Date();
-  return {
-    this_month: `01–${d.getDate()}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`,
-    last_month: 'Mês anterior',
-    last_7d: 'Últimos 7 dias',
-    last_30d: 'Últimos 30 dias',
-    this_year: String(d.getFullYear()),
-  }[p] || p;
+  return { this_month:`01–${d.getDate()}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`,
+           last_month:'Mês anterior', last_7d:'Últ. 7 dias',
+           last_30d:'Últ. 30 dias', this_year:String(d.getFullYear()) }[p]||p;
 }
 
-// Detecta ícone pelo nome/objetivo da campanha
 function campIcon(name='', obj='') {
   const t = (name+obj).toUpperCase();
-  if (t.includes('VIDEO') || t.includes('VÍDEO') || t.includes('REEL')) return {cls:'video', ico:'▶'};
-  if (t.includes('SEGUIDOR') || t.includes('FOLLOW') || t.includes('PERFIL')) return {cls:'follow', ico:'👤'};
-  if (t.includes('TRAFEGO') || t.includes('TRÁFEGO') || t.includes('IFOOD') || t.includes('DELIVERY') || t.includes('LINK')) return {cls:'conv', ico:'🔗'};
-  return {cls:'reach', ico:'📣'};
+  if (t.includes('VIDEO')||t.includes('VÍDEO')||t.includes('REEL')) return {cls:'ci-video', ico:'▶'};
+  if (t.includes('SEGUIDOR')||t.includes('FOLLOW')||t.includes('PERFIL')) return {cls:'ci-follow', ico:'👤'};
+  if (t.includes('IFOOD')||t.includes('DELIVERY')||t.includes('VENDA')||t.includes('CONVERSÃO')) return {cls:'ci-conv', ico:'🛒'};
+  if (t.includes('ALCAN')||t.includes('REACH')||t.includes('TEMÁTIC')||t.includes('TEMATIC')) return {cls:'ci-reach', ico:'📡'};
+  return {cls:'ci-other', ico:'📣'};
 }
 
-// ─── RENDER ───────────────────────────────────────────────────
 function setLoading(name) {
   document.getElementById('dashPage').innerHTML =
     `<div class="state-box"><div class="spinner"></div><p>Carregando <strong>${name}</strong>…</p></div>`;
 }
 function setError(msg) {
   document.getElementById('dashPage').innerHTML =
-    `<div class="state-box"><div class="ico">⚠️</div>
+    `<div class="state-box"><div class="state-ico">⚠️</div>
      <div class="err-box">${msg}</div>
      <p style="font-size:12px">Verifique o token e a permissão <code>ads_read</code>.</p></div>`;
 }
 
-const MCLASS = ['m1','m2','m3'];
+const MC = ['m1','m2','m3'];
 
 function render(acc, {summary, campaigns, topAds}) {
+  const best = topAds[0]||null;
+  const topClk = [...topAds].sort((a,b)=>Number(b.clicks||0)-Number(a.clicks||0))[0];
+  const topRch = [...topAds].sort((a,b)=>Number(b.reach||0)-Number(a.reach||0))[0];
+  const topImp = [...topAds].sort((a,b)=>Number(b.impressions||0)-Number(a.impressions||0))[0];
 
-  // ── best ad para insights
-  const best = topAds[0] || null;
-
-  // ── campanhas HTML
   const campsHtml = campaigns.length === 0
     ? '<p class="no-data">Nenhuma campanha veiculou no período.</p>'
     : campaigns.map(c => {
-        const ins = c.insights?.data?.[0] || {};
-        const {cls, ico} = campIcon(c.name, c.objective||'');
-        return `
-        <div class="camp-item">
+        const ins = c.insights?.data?.[0]||{};
+        const {cls,ico} = campIcon(c.name, c.objective||'');
+        return `<div class="camp-item">
           <div class="camp-icon ${cls}">${ico}</div>
           <div style="flex:1">
             <div class="camp-name">${c.name}</div>
             <div class="camp-metrics">
               <strong>${BRL(ins.spend)}</strong>
-              <span class="sep">•</span>
-              Alcance: <strong>${N(ins.reach)}</strong>
-              <span class="sep">•</span>
-              Impressões: <strong>${N(ins.impressions)}</strong>
+              <span class="sep">•</span>Alcance: <strong>${N(ins.reach)}</strong>
+              <span class="sep">•</span>Impressões: <strong>${N(ins.impressions)}</strong>
             </div>
           </div>
         </div>`;
       }).join('');
 
-  // ── top ads HTML
   const adsHtml = topAds.length === 0
     ? '<p class="no-data">Sem dados de anúncios no período.</p>'
     : topAds.map((ad,i) => `
       <div class="ad-item">
-        <div class="ad-medal ${MCLASS[i]}">${i+1}</div>
+        <div class="ad-medal ${MC[i]}">${i+1}</div>
         ${ad.thumb
           ? `<img class="ad-thumb" src="${ad.thumb}" crossorigin="anonymous" alt=""
                onerror="this.outerHTML='<div class=ad-thumb-ph>🖼️</div>'">`
@@ -532,132 +401,103 @@ function render(acc, {summary, campaigns, topAds}) {
         <div class="ad-info">
           <div class="ad-name" title="${ad.ad_name}">${ad.ad_name}</div>
           <div class="ad-metrics">
-            <div><div class="am-label">Investimento</div><div class="am-value">${BRL(ad.spend)}</div></div>
-            <div><div class="am-label">Alcance</div><div class="am-value">${N(ad.reach)}</div></div>
-            <div><div class="am-label">Impressões</div><div class="am-value">${N(ad.impressions)}</div></div>
-            <div><div class="am-label">Cliques</div><div class="am-value">${N(ad.clicks)}</div></div>
+            <div><div class="am-l">Investimento</div><div class="am-v">${BRL(ad.spend)}</div></div>
+            <div><div class="am-l">Alcance</div><div class="am-v">${N(ad.reach)}</div></div>
+            <div><div class="am-l">Impressões</div><div class="am-v">${N(ad.impressions)}</div></div>
+            <div><div class="am-l">Cliques</div><div class="am-v">${N(ad.clicks)}</div></div>
           </div>
         </div>
       </div>`).join('');
 
-  // ── insights rápidos
-  const topByClicks    = [...topAds].sort((a,b)=>Number(b.clicks||0)-Number(a.clicks||0))[0];
-  const topByReach     = [...topAds].sort((a,b)=>Number(b.reach||0)-Number(a.reach||0))[0];
-  const topByImpr      = [...topAds].sort((a,b)=>Number(b.impressions||0)-Number(a.impressions||0))[0];
-
-  const insightCards = [
-    { ico:'🏆', label:'Melhor anúncio',          name: best?.ad_name||'—',         value: BRL(best?.spend) },
-    { ico:'👆', label:'Maior volume de cliques',  name: topByClicks?.ad_name||'—',  value: `${N(topByClicks?.clicks)} cliques` },
-    { ico:'👥', label:'Maior alcance',            name: topByReach?.ad_name||'—',   value: `${N(topByReach?.reach)} pessoas` },
-    { ico:'👁️', label:'Mais impressões',          name: topByImpr?.ad_name||'—',    value: `${N(topByImpr?.impressions)} imp.` },
-  ].map(c => `
-    <div class="insight-card">
-      <div class="ins-icon">${c.ico}</div>
-      <div class="ins-label">${c.label}</div>
-      <div class="ins-name" title="${c.name}">${c.name}</div>
-      <div class="ins-value">${c.value}</div>
-    </div>`).join('');
+  const insCards = [
+    {ico:'🏆', label:'Melhor anúncio',       name:best?.ad_name||'—',    value:BRL(best?.spend)},
+    {ico:'👆', label:'Maior vol. de cliques', name:topClk?.ad_name||'—', value:`${N(topClk?.clicks)} cliques`},
+    {ico:'👥', label:'Maior alcance',         name:topRch?.ad_name||'—', value:`${N(topRch?.reach)} pessoas`},
+    {ico:'👁️', label:'Mais impressões',      name:topImp?.ad_name||'—', value:`${N(topImp?.impressions)} imp.`},
+  ].map(c=>`<div class="ins-card">
+    <div class="ins-ico">${c.ico}</div>
+    <div class="ins-label">${c.label}</div>
+    <div class="ins-name" title="${c.name}">${c.name}</div>
+    <div class="ins-value">${c.value}</div>
+  </div>`).join('');
 
   document.getElementById('dashPage').innerHTML = `
   <div id="exportTarget">
-
-    <!-- HEADER -->
     <div class="dash-header">
-      <div class="header-logo">
-        <div class="brand-text">BERRY'S <span>ICE CREAM</span></div>
+      <div class="deco-circle"></div>
+      <div class="h-brand">
+        <div class="h-brand-box">
+          <div>
+            <div class="h-brand-name">BERRY'S</div>
+            <div class="h-brand-sub">ICE CREAM</div>
+          </div>
+        </div>
       </div>
-      <div class="dash-title">Dashboard</div>
-      <div class="dash-subtitle">Meta Ads — Berry's | <span class="dash-unit">${acc.name.toUpperCase()}</span></div>
-      <div class="date-row">
+      <div class="h-title">Dashboard</div>
+      <div class="h-sub">Meta Ads — Berry's</div>
+      <div class="h-unit">| ${acc.name.toUpperCase()}</div>
+      <div class="h-pills">
         <span class="date-pill">📅 ${dateLabel()}</span>
-        <span class="live-pill"><span class="dot"></span> Dados do período · relatório atualizado</span>
+        <span class="live-pill"><span class="dot"></span> Dados em tempo real</span>
       </div>
-      <img class="mascot" src="./mascote-berrys.png" alt=""
-           onerror="this.style.display='none'">
+      <img class="mascot" src="./mascote-berrys.png" alt="" onerror="this.style.display='none'">
     </div>
 
-    <!-- KPI -->
     <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-icon money">💰</div>
-        <div class="kpi-label">Investimento</div>
-        <div class="kpi-value">${BRL(summary.spend)}</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-icon reach">👥</div>
-        <div class="kpi-label">Alcance</div>
-        <div class="kpi-value">${N(summary.reach)}</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-icon eye">👁️</div>
-        <div class="kpi-label">Impressões</div>
-        <div class="kpi-value">${N(summary.impressions)}</div>
-      </div>
+      <div class="kpi-card"><div class="kpi-icon ki-money">💰</div><div class="kpi-label">Investimento</div><div class="kpi-value">${BRL(summary.spend)}</div></div>
+      <div class="kpi-card"><div class="kpi-icon ki-reach">👥</div><div class="kpi-label">Alcance</div><div class="kpi-value">${N(summary.reach)}</div></div>
+      <div class="kpi-card"><div class="kpi-icon ki-eye">👁️</div><div class="kpi-label">Impressões</div><div class="kpi-value">${N(summary.impressions)}</div></div>
     </div>
 
-    <!-- CAMPANHAS -->
     <div class="section">
-      <div class="section-title"><span class="icon">📣</span> Campanhas ativas</div>
+      <div class="sec-title">📣 Campanhas veiculadas</div>
       ${campsHtml}
     </div>
 
-    <!-- RESUMO META ADS -->
     <div class="section">
-      <div class="section-title"><span class="icon">∞</span> Resumo da conta Meta Ads</div>
-      <div class="resumo-row">
+      <div class="sec-title">∞ Resumo da conta Meta Ads</div>
+      <div class="meta-row">
         <div class="meta-logo">∞</div>
-        <div>
-          <div class="resumo-label">Meta Ads</div>
-          <div class="resumo-name">Berry's | ${acc.name}</div>
-        </div>
+        <div><div class="meta-info-label">Meta Ads</div><div class="meta-info-name">Berry's | ${acc.name}</div></div>
       </div>
-      <div class="resumo-stats">
-        <div><div class="rs-label">Investimento</div><div class="rs-value">${BRL(summary.spend)}</div></div>
-        <div><div class="rs-label">Alcance</div><div class="rs-value">${N(summary.reach)}</div></div>
-        <div><div class="rs-label">Impressões</div><div class="rs-value">${N(summary.impressions)}</div></div>
-        <div><div class="rs-label">Período</div><div class="rs-value" style="font-size:10px">${periodShort()}</div></div>
+      <div class="resumo-grid">
+        <div><div class="rg-label">Investimento</div><div class="rg-value">${BRL(summary.spend)}</div></div>
+        <div><div class="rg-label">Alcance</div><div class="rg-value">${N(summary.reach)}</div></div>
+        <div><div class="rg-label">Impressões</div><div class="rg-value">${N(summary.impressions)}</div></div>
+        <div><div class="rg-label">Período</div><div class="rg-value" style="font-size:10px">${periodShort()}</div></div>
       </div>
     </div>
 
-    <!-- MELHORES ANÚNCIOS -->
     <div class="section">
-      <div class="section-title"><span class="icon">🏆</span> Melhores anúncios</div>
+      <div class="sec-title">🏆 Melhores anúncios</div>
       ${adsHtml}
     </div>
 
-    <!-- INSIGHTS RÁPIDOS -->
     ${topAds.length > 0 ? `
     <div class="section">
-      <div class="section-title"><span class="icon">⚡</span> Insights rápidos</div>
-      <div class="insights-grid">${insightCards}</div>
+      <div class="sec-title">⚡ Insights rápidos</div>
+      <div class="ins-grid">${insCards}</div>
     </div>` : ''}
 
-    <p style="font-size:10px;color:#aaa;text-align:center;margin-top:4px">
-      Relatório referente ao período de ${dateLabel()}.
-    </p>
+    <p class="foot-note">Relatório referente ao período de ${dateLabel()}.</p>
   </div>`;
 }
 
-// ─── EXPORT ───────────────────────────────────────────────────
 async function exportImage() {
   const el = document.getElementById('exportTarget');
   if (!el) return;
   const btn = document.getElementById('btnExport');
   btn.disabled = true; btn.textContent = '⏳ Gerando imagem…';
   try {
-    const canvas = await html2canvas(el, {
-      scale: 2.5, useCORS: true,
-      backgroundColor: '#e8eef8', logging: false,
-    });
+    const canvas = await html2canvas(el, { scale:2.5, useCORS:true, backgroundColor:'#dde6f5', logging:false });
     const link = document.createElement('a');
     link.download = `berrys_${ACCOUNTS[activeTab].name.replace(/\s+/g,'_')}_meta_ads.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
-  } catch(e) { alert('Erro: ' + e.message); }
+  } catch(e) { alert('Erro: '+e.message); }
   btn.disabled = false; btn.textContent = '📸 Exportar como imagem';
 }
 
-// ─── START ────────────────────────────────────────────────────
 buildTabs();
 </script>
 </body>
