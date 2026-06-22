@@ -226,9 +226,8 @@ async function fetchAll(acc, preset) {
     .catch(e => { throw new Error('[1/4 insights] ' + e.message); });
 
   const camps = await gql(`${act}/campaigns`, {
-    effective_status: '["ACTIVE","PAUSED","ARCHIVED","DELETED"]',
-    fields: 'name,objective',
-    limit: 30
+    fields: 'name,objective,effective_status',
+    limit: 50
   }).catch(e => { throw new Error('[2/4 campaigns] ' + e.message); });
 
   const campIns = await gql(`${act}/insights`, {
