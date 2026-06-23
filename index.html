@@ -4,112 +4,357 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Berry's — Dashboard Meta Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --navy:  #0d2657;
-  --blue:  #1a3c8f;
-  --blue2: #2558c0;
-  --blue3: #4a90d9;
-  --blight:#ddeafc;
-  --gray:  #f0f4fb;
-  --text:  #111827;
-  --text2: #6b7280;
-  --green: #16a34a;
+  --berry:    #45B9E6;
+  --berry2:   #83D4F1;
+  --berry3:   #A3DDF0;
+  --berry4:   #A7DDE9;
+  --ice:      #CEEBF1;
+  --ice2:     #E4F5FA;
+  --ice3:     #F2FAFE;
+  --white:    #FFFFFF;
+  --ink:      #0E1A2B;
+  --ink2:     #3A5169;
+  --ink3:     #6A8CA3;
+  --navy:     #0B2540;
+  --green:    #22C55E;
+  --green-bg: rgba(34,197,94,.12);
+  --shadow:   0 4px 24px rgba(69,185,230,.13);
+  --shadow-sm:0 2px 12px rgba(69,185,230,.10);
+  --r-card:   22px;
+  --r-pill:   100px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background: #dde6f5; min-height: 100vh; }
-.setup-bar { background: #08173d; padding: 8px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.setup-bar label { color: #7fa8e0; font-size: 12px; font-weight: 700; white-space: nowrap; }
-.setup-bar input { flex: 1; min-width: 180px; padding: 6px 12px; border-radius: 8px; border: none; font-size: 13px; background: #142150; color: white; }
-.setup-bar input::placeholder { color: #4a6aaa; }
-.setup-bar select { padding: 6px 10px; border-radius: 8px; border: none; font-size: 12px; background: #142150; color: white; cursor: pointer; }
-.btn-connect { background: var(--blue3); color: white; border: none; padding: 6px 18px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
-.btn-connect:hover { background: #3a7fcf; }
-.tabs-wrap { background: white; border-bottom: 2px solid #d8e4f5; overflow-x: auto; white-space: nowrap; padding: 0 14px; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
-.tab { display: inline-block; padding: 11px 15px; cursor: pointer; font-size: 12px; font-weight: 500; color: var(--text2); border-bottom: 3px solid transparent; transition: all .15s; user-select: none; }
-.tab:hover { color: var(--blue); }
-.tab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
-.page { max-width: 440px; margin: 0 auto; padding: 16px 12px 36px; }
-.dash-header { background: linear-gradient(145deg, #08173d 0%, #112a72 45%, #1e4db5 100%); border-radius: 24px; padding: 22px 20px; margin-bottom: 14px; position: relative; overflow: hidden; min-height: 200px; }
-.dash-header::before { content: '❄  ❄  ❄'; position: absolute; top: 14px; right: 120px; color: rgba(255,255,255,.15); font-size: 16px; letter-spacing: 8px; pointer-events: none; white-space: nowrap; }
-.dash-header::after { content: '❄   ❄'; position: absolute; bottom: 26px; right: 140px; color: rgba(255,255,255,.10); font-size: 12px; letter-spacing: 14px; pointer-events: none; }
-.dash-header .deco-circle { position: absolute; right: -20px; bottom: -30px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(74,144,217,.25) 0%, transparent 70%); pointer-events: none; }
-.h-brand { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-.h-brand-box { background: white; border-radius: 10px; padding: 5px 10px; display: flex; align-items: center; gap: 6px; }
-.h-brand-name { font-size: 14px; font-weight: 900; color: var(--navy); letter-spacing: .5px; line-height: 1; }
-.h-brand-sub { font-size: 8px; color: var(--blue2); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1; }
-.h-title { color: white; font-size: 38px; font-weight: 900; line-height: 1; margin-bottom: 3px; letter-spacing: -.5px; }
-.h-sub { color: rgba(255,255,255,.6); font-size: 13px; font-weight: 500; margin-bottom: 1px; }
-.h-unit { color: #7eb8ff; font-weight: 800; font-size: 15px; }
+body {
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  background: #D4EEF8;
+  min-height: 100vh;
+}
+
+/* ── SETUP BAR ── */
+.setup-bar {
+  background: var(--navy);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid rgba(69,185,230,.3);
+}
+.setup-bar label { color: var(--berry2); font-size: 11px; font-weight: 800; white-space: nowrap; letter-spacing: .5px; text-transform: uppercase; }
+.setup-bar input {
+  flex: 1; min-width: 180px; padding: 7px 14px; border-radius: 10px;
+  border: 1.5px solid rgba(69,185,230,.25); font-size: 13px;
+  background: rgba(255,255,255,.07); color: white; font-family: inherit;
+  transition: border-color .2s;
+}
+.setup-bar input:focus { outline: none; border-color: var(--berry); }
+.setup-bar input::placeholder { color: rgba(255,255,255,.3); }
+.setup-bar select {
+  padding: 7px 12px; border-radius: 10px; border: 1.5px solid rgba(69,185,230,.25);
+  font-size: 12px; background: rgba(255,255,255,.07); color: white; cursor: pointer;
+  font-family: inherit; font-weight: 700;
+}
+.btn-connect {
+  background: linear-gradient(135deg, var(--berry), #2AA6D8);
+  color: white; border: none; padding: 8px 20px; border-radius: 10px;
+  font-size: 12px; font-weight: 800; cursor: pointer; letter-spacing: .3px;
+  font-family: inherit; box-shadow: 0 4px 14px rgba(69,185,230,.35);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-connect:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(69,185,230,.45); }
+
+/* ── TABS ── */
+.tabs-wrap {
+  background: var(--white);
+  border-bottom: 2px solid var(--ice);
+  overflow-x: auto; white-space: nowrap; padding: 0 16px;
+  position: sticky; top: 0; z-index: 10;
+  box-shadow: 0 2px 16px rgba(69,185,230,.12);
+  scrollbar-width: none;
+}
+.tabs-wrap::-webkit-scrollbar { display: none; }
+.tab {
+  display: inline-block; padding: 12px 16px; cursor: pointer;
+  font-size: 12px; font-weight: 700; color: var(--ink3);
+  border-bottom: 3px solid transparent; transition: all .15s;
+  user-select: none; letter-spacing: .2px;
+}
+.tab:hover { color: var(--berry); }
+.tab.active { color: var(--berry); border-bottom-color: var(--berry); }
+
+/* ── PAGE WRAPPER ── */
+.page { max-width: 440px; margin: 0 auto; padding: 18px 14px 40px; }
+
+/* ── HEADER ── */
+.dash-header {
+  background: linear-gradient(165deg, #45B9E6 0%, #2A9FCC 40%, #1A7FAA 100%);
+  border-radius: 28px; padding: 26px 24px 22px; margin-bottom: 16px;
+  position: relative; overflow: hidden; min-height: 210px;
+}
+.dash-header::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: 28px;
+  background-image:
+    radial-gradient(ellipse 18px 22px at 28px 30px, rgba(255,255,255,.10) 100%, transparent 100%),
+    radial-gradient(ellipse 12px 15px at 80px 55px, rgba(255,255,255,.07) 100%, transparent 100%),
+    radial-gradient(ellipse 20px 14px at 150px 25px, rgba(255,255,255,.08) 100%, transparent 100%),
+    radial-gradient(ellipse 10px 18px at 200px 60px, rgba(255,255,255,.06) 100%, transparent 100%),
+    radial-gradient(ellipse 16px 11px at 60px 90px, rgba(255,255,255,.07) 100%, transparent 100%),
+    radial-gradient(ellipse 22px 16px at 130px 80px, rgba(255,255,255,.05) 100%, transparent 100%);
+  pointer-events: none;
+}
+.dash-header::after {
+  content: '✦  ✦  ✦';
+  position: absolute; top: 16px; right: 130px;
+  color: rgba(255,255,255,.25); font-size: 11px; letter-spacing: 10px;
+  pointer-events: none; white-space: nowrap;
+}
+.hdr-deco-ring {
+  position: absolute; right: -30px; bottom: -40px;
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hdr-deco-ring2 {
+  position: absolute; right: 50px; bottom: -80px;
+  width: 130px; height: 130px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.h-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.h-brand-box {
+  background: white; border-radius: 14px; padding: 7px 13px;
+  display: flex; align-items: center; gap: 7px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.12);
+}
+.h-brand-ico { font-size: 18px; line-height: 1; }
+.h-brand-name { font-size: 15px; font-weight: 900; color: var(--berry); letter-spacing: .5px; line-height: 1; }
+.h-brand-sub { font-size: 8px; color: var(--ink3); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; line-height: 1; margin-top: 2px; }
+.h-title { color: white; font-size: 36px; font-weight: 900; line-height: 1; margin-bottom: 2px; letter-spacing: -.5px; text-shadow: 0 2px 8px rgba(0,0,0,.15); }
+.h-sub { color: rgba(255,255,255,.75); font-size: 13px; font-weight: 600; }
+.h-unit { color: white; font-weight: 900; font-size: 15px; margin-top: 1px; letter-spacing: .3px; }
 .h-pills { margin-top: 14px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.date-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); border-radius: 20px; padding: 5px 13px; color: rgba(255,255,255,.9); font-size: 12px; font-weight: 600; }
-.live-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(22,163,74,.2); border: 1px solid rgba(22,163,74,.4); color: #4ade80; border-radius: 20px; padding: 4px 11px; font-size: 11px; font-weight: 700; }
-.live-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: pulse 1.5s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-.mascot { position: absolute; right: -8px; bottom: 0; height: 185px; filter: drop-shadow(-6px 4px 16px rgba(0,0,0,.35)); object-fit: contain; }
-.kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 12px; }
-.kpi-card { background: white; border-radius: 18px; padding: 14px 10px; text-align: center; box-shadow: 0 2px 10px rgba(26,60,143,.09); }
-.kpi-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; margin: 0 auto 8px; }
-.ki-money { background: #ddeafc; } .ki-reach { background: #d4f0e4; } .ki-eye { background: #ede9fc; }
-.kpi-label { font-size: 10px; color: var(--text2); margin-bottom: 3px; }
-.kpi-value { font-size: 15px; font-weight: 900; color: var(--navy); }
-.section { background: white; border-radius: 20px; padding: 18px 16px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(26,60,143,.07); }
-.sec-title { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; gap: 7px; }
-.camp-item { display: flex; align-items: flex-start; gap: 11px; padding: 10px 0; border-bottom: 1px solid var(--gray); }
+.date-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,.22); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: var(--r-pill);
+  padding: 5px 14px; color: white; font-size: 11px; font-weight: 700;
+}
+.live-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--green-bg); border: 1.5px solid rgba(34,197,94,.4);
+  color: #4ADE80; border-radius: var(--r-pill); padding: 5px 13px;
+  font-size: 11px; font-weight: 800; backdrop-filter: blur(8px);
+}
+.live-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ADE80; animation: pulse 1.5s ease-in-out infinite; flex-shrink: 0; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.8)} }
+.mascot {
+  position: absolute; right: -6px; bottom: 0; height: 190px;
+  filter: drop-shadow(-4px 4px 20px rgba(0,0,0,.25));
+  object-fit: contain;
+}
+
+/* ── KPI CARDS ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 14px; }
+.kpi-card {
+  background: var(--white); border-radius: var(--r-card); padding: 16px 10px 14px;
+  text-align: center; box-shadow: var(--shadow-sm);
+  border: 1.5px solid rgba(69,185,230,.13);
+  position: relative; overflow: hidden;
+}
+.kpi-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  border-radius: 0 0 var(--r-card) var(--r-card);
+}
+.kpi-card.kc-money::after { background: linear-gradient(90deg, #45B9E6, #83D4F1); }
+.kpi-card.kc-reach::after { background: linear-gradient(90deg, #22C55E, #4ADE80); }
+.kpi-card.kc-eye::after   { background: linear-gradient(90deg, #A78BFA, #C4B5FD); }
+.kpi-icon-wrap {
+  width: 42px; height: 42px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; margin: 0 auto 9px; font-size: 20px;
+}
+.ki-money { background: linear-gradient(135deg, #DDEEFA, #C4E6F8); }
+.ki-reach { background: linear-gradient(135deg, #DCFCE7, #BBF7D0); }
+.ki-eye   { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+.kpi-label { font-size: 9px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
+.kpi-value { font-size: 14px; font-weight: 900; color: var(--ink); line-height: 1.1; }
+
+/* ── SECTION CARD ── */
+.section {
+  background: var(--white); border-radius: var(--r-card); padding: 20px 18px;
+  margin-bottom: 14px; box-shadow: var(--shadow-sm);
+  border: 1.5px solid rgba(69,185,230,.10);
+}
+.sec-title {
+  font-size: 15px; font-weight: 900; color: var(--ink); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-title-ico {
+  width: 32px; height: 32px; border-radius: 10px; display: flex;
+  align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+}
+.ico-bg-blue  { background: linear-gradient(135deg, #DDEEFA, #C4E6F8); }
+.ico-bg-green { background: linear-gradient(135deg, #DCFCE7, #BBF7D0); }
+.ico-bg-gold  { background: linear-gradient(135deg, #FEF9C3, #FDE68A); }
+.ico-bg-purple{ background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+.ico-bg-pink  { background: linear-gradient(135deg, #FCE7F3, #FBCFE8); }
+
+/* ── CAMPAIGNS ── */
+.camp-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--ice); }
 .camp-item:last-child { border-bottom: none; padding-bottom: 0; }
-.camp-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; color: white; }
-.ci-video  { background: linear-gradient(135deg,#1a3c8f,#2d6fd4); }
-.ci-follow { background: linear-gradient(135deg,#2558c0,#3a90e0); }
-.ci-conv   { background: linear-gradient(135deg,#0f7a4e,#16a34a); }
-.ci-reach  { background: linear-gradient(135deg,#7c3aed,#a855f7); }
-.ci-other  { background: linear-gradient(135deg,#1e4db5,#4a90d9); }
-.camp-name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 5px; line-height: 1.3; }
-.camp-metrics { display: flex; gap: 5px; align-items: center; font-size: 11px; color: var(--text2); flex-wrap: wrap; }
-.camp-metrics strong { color: var(--text); }
-.sep { color: #d1d5db; }
+.camp-ico-wrap {
+  width: 42px; height: 42px; min-width: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.ci-video  { background: linear-gradient(135deg, #45B9E6, #2AA6D8); }
+.ci-follow { background: linear-gradient(135deg, #83D4F1, #45B9E6); }
+.ci-conv   { background: linear-gradient(135deg, #22C55E, #16A34A); }
+.ci-reach  { background: linear-gradient(135deg, #A78BFA, #7C3AED); }
+.ci-other  { background: linear-gradient(135deg, #A3DDF0, #45B9E6); }
+.camp-name { font-size: 12px; font-weight: 800; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
+.camp-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+.chip {
+  display: inline-flex; align-items: center; gap: 3px;
+  background: var(--ice2); border-radius: var(--r-pill);
+  padding: 3px 9px; font-size: 10px; font-weight: 700; color: var(--ink2);
+}
+.chip span { color: var(--berry); font-weight: 900; }
+
+/* ── META RESUMO ── */
 .meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.meta-logo { width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0; background: linear-gradient(135deg,#0668E1,#0090FF); display: flex; align-items: center; justify-content: center; font-size: 22px; color: white; font-weight: 900; }
-.meta-info-label { font-size: 11px; color: var(--text2); }
-.meta-info-name  { font-size: 13px; font-weight: 800; color: var(--text); }
-.resumo-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; background: var(--gray); border-radius: 14px; padding: 13px 10px; }
-.rg-label { font-size: 9px; color: var(--text2); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .5px; }
-.rg-value { font-size: 12px; font-weight: 900; color: var(--navy); }
-.ad-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray); }
+.meta-logo {
+  width: 44px; height: 44px; border-radius: 13px; flex-shrink: 0;
+  background: linear-gradient(135deg, #0668E1, #0090FF);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: white; font-weight: 900;
+  box-shadow: 0 4px 14px rgba(6,104,225,.25);
+}
+.meta-info-label { font-size: 10px; color: var(--ink3); font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+.meta-info-name  { font-size: 13px; font-weight: 900; color: var(--ink); }
+.resumo-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 8px;
+  background: var(--ice2); border-radius: 16px; padding: 14px 12px;
+  border: 1.5px solid rgba(69,185,230,.15);
+}
+.rg-label { font-size: 8px; color: var(--ink3); margin-bottom: 3px; text-transform: uppercase; letter-spacing: .6px; font-weight: 700; }
+.rg-value { font-size: 11px; font-weight: 900; color: var(--ink); }
+
+/* ── TOP ADS ── */
+.ad-item { display: flex; align-items: center; gap: 10px; padding: 13px 0; border-bottom: 1px solid var(--ice); }
 .ad-item:last-child { border-bottom: none; padding-bottom: 0; }
-.ad-medal { width: 28px; height: 28px; min-width: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 13px; }
-.m1 { background: #ffd700; color: #7a5a00; } .m2 { background: #c8c8c8; color: #3a3a3a; } .m3 { background: #cd7f32; color: white; }
-.ad-thumb { width: 56px; height: 56px; min-width: 56px; border-radius: 12px; object-fit: cover; background: var(--gray); }
-.ad-thumb-ph { width: 56px; height: 56px; min-width: 56px; border-radius: 12px; background: var(--blight); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.ad-item.rank-1 { padding-top: 0; }
+.rank-badge {
+  width: 30px; height: 30px; min-width: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px; flex-shrink: 0;
+}
+.rb-1 { background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #7C3A00; box-shadow: 0 2px 10px rgba(245,158,11,.35); }
+.rb-2 { background: linear-gradient(135deg, #D1D5DB, #9CA3AF); color: #1F2937; }
+.rb-3 { background: linear-gradient(135deg, #D97706, #B45309); color: white; }
+.ad-thumb { width: 58px; height: 58px; min-width: 58px; border-radius: 14px; object-fit: cover; background: var(--ice); }
+.ad-thumb-ph { width: 58px; height: 58px; min-width: 58px; border-radius: 14px; background: var(--ice2); display: flex; align-items: center; justify-content: center; font-size: 26px; border: 1.5px solid var(--ice); }
 .ad-info { flex: 1; min-width: 0; }
-.ad-name { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ad-metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 3px; }
-.am-l { font-size: 9px; color: var(--text2); text-decoration: underline; }
-.am-v { font-size: 11px; font-weight: 800; color: var(--text); }
-.ins-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
-.ins-card { background: var(--gray); border-radius: 14px; padding: 13px 12px; }
-.ins-ico { font-size: 20px; margin-bottom: 5px; }
-.ins-label { font-size: 10px; color: var(--text2); margin-bottom: 2px; }
-.ins-name { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ins-value { font-size: 15px; font-weight: 900; color: var(--navy); }
-.foot-note { font-size: 10px; color: #aaa; text-align: center; margin-top: 6px; }
-.export-wrap { max-width: 440px; margin: 0 auto; padding: 0 12px 44px; }
-.btn-export { background: linear-gradient(135deg, var(--navy), var(--blue2)); color: white; border: none; padding: 15px; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; width: 100%; box-shadow: 0 4px 14px rgba(26,60,143,.3); }
-.btn-export:hover { opacity: .92; }
-.btn-export:disabled { opacity: .5; cursor: default; }
-.state-box { text-align: center; padding: 56px 24px; color: var(--text2); }
-.state-ico { font-size: 48px; margin-bottom: 14px; }
-.state-box p { font-size: 14px; line-height: 1.7; }
-.spinner { width: 36px; height: 36px; border: 3px solid var(--blight); border-top-color: var(--blue); border-radius: 50%; animation: spin .75s linear infinite; margin: 0 auto 14px; }
+.ad-name { font-size: 11px; font-weight: 800; color: var(--ink); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ad-metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 4px; }
+.am-l { font-size: 8px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 1px; }
+.am-v { font-size: 11px; font-weight: 900; color: var(--ink); }
+.top1-wrap { position: relative; }
+.top1-seal {
+  position: absolute; top: -6px; right: -4px;
+  background: linear-gradient(135deg, #FCD34D, #F59E0B);
+  color: #7C3A00; font-size: 8px; font-weight: 900;
+  padding: 3px 8px; border-radius: var(--r-pill);
+  box-shadow: 0 2px 8px rgba(245,158,11,.35); white-space: nowrap; letter-spacing: .3px;
+}
+.top1-card {
+  background: linear-gradient(135deg, #FFF9EB, #FFFBF3);
+  border: 2px solid rgba(245,158,11,.2); border-radius: 16px;
+  padding: 13px 12px; margin-bottom: 12px;
+  box-shadow: 0 4px 18px rgba(245,158,11,.10);
+}
+
+/* ── INSIGHTS ── */
+.ins-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.ins-card {
+  background: var(--ice2); border-radius: 16px; padding: 15px 13px;
+  border: 1.5px solid rgba(69,185,230,.15);
+  transition: transform .15s;
+}
+.ins-card:hover { transform: translateY(-2px); }
+.ins-ico-wrap {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; margin-bottom: 8px;
+  background: white; box-shadow: 0 2px 8px rgba(69,185,230,.12);
+}
+.ins-label { font-size: 9px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 3px; }
+.ins-name { font-size: 10px; font-weight: 700; color: var(--ink2); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ins-value { font-size: 15px; font-weight: 900; color: var(--berry); }
+
+/* ── FOOTER ── */
+.dash-footer {
+  background: linear-gradient(135deg, var(--berry), #2AA6D8);
+  border-radius: 20px; padding: 18px 20px; margin-top: 4px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.dash-footer::before {
+  content: '✦  ✦  ✦  ✦  ✦';
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,.2); font-size: 9px; letter-spacing: 8px; white-space: nowrap;
+}
+.foot-brand { color: white; font-size: 14px; font-weight: 900; margin-bottom: 4px; letter-spacing: .3px; }
+.foot-tagline { color: rgba(255,255,255,.8); font-size: 11px; font-weight: 600; font-style: italic; margin-bottom: 6px; }
+.foot-meta { color: rgba(255,255,255,.55); font-size: 9px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; }
+
+/* ── EXPORT ── */
+.export-wrap { max-width: 440px; margin: 0 auto; padding: 0 14px 50px; }
+.btn-export {
+  background: linear-gradient(135deg, var(--navy), #1A4070);
+  color: white; border: none; padding: 16px; border-radius: 16px;
+  font-size: 14px; font-weight: 800; cursor: pointer; width: 100%;
+  box-shadow: 0 4px 18px rgba(11,37,64,.3); font-family: inherit; letter-spacing: .3px;
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-export:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(11,37,64,.4); }
+.btn-export:disabled { opacity: .5; cursor: default; transform: none; }
+
+/* ── STATES ── */
+.state-box { text-align: center; padding: 64px 24px; color: var(--ink3); }
+.state-ico { font-size: 52px; margin-bottom: 16px; }
+.state-box p { font-size: 14px; line-height: 1.75; font-weight: 600; }
+.state-box strong { color: var(--berry); }
+.spinner {
+  width: 38px; height: 38px; border: 3px solid var(--ice);
+  border-top-color: var(--berry); border-radius: 50%;
+  animation: spin .75s linear infinite; margin: 0 auto 16px;
+}
 @keyframes spin { to { transform: rotate(360deg); } }
-.err-box { background: #fdf0f0; border: 1px solid #f5c6c6; border-radius: 12px; padding: 14px; color: #c0392b; font-size: 13px; margin: 12px 0; }
-.no-data { color: var(--text2); font-size: 13px; text-align: center; padding: 14px 0; }
+.err-box {
+  background: #FFF0F0; border: 1.5px solid #FCA5A5;
+  border-radius: 14px; padding: 14px; color: #DC2626;
+  font-size: 13px; margin: 14px 0; font-weight: 700;
+}
+.no-data { color: var(--ink3); font-size: 13px; text-align: center; padding: 16px 0; font-weight: 600; }
+
+/* ── DIVIDER ── */
+.section-divider {
+  display: flex; align-items: center; gap: 10px; margin: 4px 0 14px;
+}
+.section-divider::before, .section-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--ice);
+}
+.section-divider span { font-size: 16px; }
 </style>
 </head>
 <body>
 
 <div class="setup-bar">
-  <label>🔑 Access Token:</label>
-  <input type="password" id="tokenInput" placeholder="Cole o token do Meta Ads aqui…" />
+  <label>🔑 Token:</label>
+  <input type="password" id="tokenInput" placeholder="Cole o Access Token do Meta Ads…" />
   <select id="datePreset" onchange="reloadTab()">
     <option value="this_month">Mês atual</option>
     <option value="last_month">Mês anterior</option>
@@ -124,8 +369,8 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #dde6f5; min-heig
 
 <div class="page" id="dashPage">
   <div class="state-box">
-    <div class="state-ico">🔑</div>
-    <p>Cole o <strong>Access Token</strong> da Meta acima<br>e clique em <strong>Conectar</strong>.</p>
+    <div class="state-ico">🍦</div>
+    <p>Cole o <strong>Access Token</strong> da Meta acima<br>e clique em <strong>Conectar</strong> para carregar<br>os dados da unidade.</p>
   </div>
 </div>
 
@@ -246,6 +491,7 @@ async function fetchAll(acc, preset) {
   const campaigns = (camps.data||[])
     .map(c => ({ ...c, _ins: campInsMap[c.id] || null }))
     .filter(c => Number(c._ins?.impressions||0) > 1);
+
   const rawAds = (adsIns.data||[])
     .filter(a => Number(a.impressions||0) > 1)
     .sort((a,b) => Number(b.reach||0) - Number(a.reach||0))
@@ -292,19 +538,19 @@ function campIcon(name='', obj='') {
 
 function setLoading(name) {
   document.getElementById('dashPage').innerHTML =
-    `<div class="state-box"><div class="spinner"></div><p>Carregando <strong>${name}</strong>…</p></div>`;
+    `<div class="state-box"><div class="spinner"></div><p>Carregando dados de<br><strong>${name}</strong>…</p></div>`;
 }
 function setError(msg) {
   document.getElementById('dashPage').innerHTML =
     `<div class="state-box"><div class="state-ico">⚠️</div>
      <div class="err-box">${msg}</div>
-     <p style="font-size:12px">Verifique o token e a permissão <code>ads_read</code>.</p></div>`;
+     <p style="font-size:12px;font-weight:600">Verifique o token e a permissão <code>ads_read</code>.</p></div>`;
 }
 
-const MC = ['m1','m2','m3'];
+const RB = ['rb-1','rb-2','rb-3'];
 
 function render(acc, {summary, campaigns, topAds}) {
-  const best = topAds[0]||null;
+  const best   = topAds[0]||null;
   const topClk = [...topAds].sort((a,b)=>Number(b.clicks||0)-Number(a.clicks||0))[0];
   const topRch = [...topAds].sort((a,b)=>Number(b.reach||0)-Number(a.reach||0))[0];
   const topImp = [...topAds].sort((a,b)=>Number(b.impressions||0)-Number(a.impressions||0))[0];
@@ -315,23 +561,45 @@ function render(acc, {summary, campaigns, topAds}) {
         const ins = c._ins||{};
         const {cls,ico} = campIcon(c.name, c.objective||'');
         return `<div class="camp-item">
-          <div class="camp-icon ${cls}">${ico}</div>
+          <div class="camp-ico-wrap ${cls}">${ico}</div>
           <div style="flex:1">
             <div class="camp-name">${c.name}</div>
-            <div class="camp-metrics">
-              <strong>${BRL(ins.spend)}</strong>
-              <span class="sep">•</span>Alcance: <strong>${N(ins.reach)}</strong>
-              <span class="sep">•</span>Impressões: <strong>${N(ins.impressions)}</strong>
+            <div class="camp-chips">
+              <div class="chip">💰 <span>${BRL(ins.spend)}</span></div>
+              <div class="chip">👥 Alcance <span>${N(ins.reach)}</span></div>
+              <div class="chip">👁 Imp. <span>${N(ins.impressions)}</span></div>
             </div>
           </div>
         </div>`;
       }).join('');
 
-  const adsHtml = topAds.length === 0
-    ? '<p class="no-data">Sem dados de anúncios no período.</p>'
-    : topAds.map((ad,i) => `
+  const top1Html = topAds[0] ? `
+    <div class="top1-wrap">
+      <div class="top1-seal">⭐ Melhor desempenho</div>
+      <div class="top1-card">
+        <div class="ad-item rank-1" style="padding:0">
+          <div class="rank-badge rb-1">1</div>
+          ${topAds[0].thumb
+            ? `<img class="ad-thumb" src="${topAds[0].thumb}" crossorigin="anonymous" alt=""
+                 onerror="this.outerHTML='<div class=ad-thumb-ph>🖼️</div>'">`
+            : `<div class="ad-thumb-ph">🖼️</div>`}
+          <div class="ad-info">
+            <div class="ad-name" title="${topAds[0].ad_name}">${topAds[0].ad_name}</div>
+            <div class="ad-metrics">
+              <div><div class="am-l">Invest.</div><div class="am-v">${BRL(topAds[0].spend)}</div></div>
+              <div><div class="am-l">Alcance</div><div class="am-v">${N(topAds[0].reach)}</div></div>
+              <div><div class="am-l">Impressões</div><div class="am-v">${N(topAds[0].impressions)}</div></div>
+              <div><div class="am-l">Cliques</div><div class="am-v">${N(topAds[0].clicks)}</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>` : '';
+
+  const otherAdsHtml = topAds.slice(1).length === 0 ? '' :
+    topAds.slice(1).map((ad,i) => `
       <div class="ad-item">
-        <div class="ad-medal ${MC[i]}">${i+1}</div>
+        <div class="rank-badge ${RB[i+1]}">${i+2}</div>
         ${ad.thumb
           ? `<img class="ad-thumb" src="${ad.thumb}" crossorigin="anonymous" alt=""
                onerror="this.outerHTML='<div class=ad-thumb-ph>🖼️</div>'">`
@@ -339,7 +607,7 @@ function render(acc, {summary, campaigns, topAds}) {
         <div class="ad-info">
           <div class="ad-name" title="${ad.ad_name}">${ad.ad_name}</div>
           <div class="ad-metrics">
-            <div><div class="am-l">Investimento</div><div class="am-v">${BRL(ad.spend)}</div></div>
+            <div><div class="am-l">Invest.</div><div class="am-v">${BRL(ad.spend)}</div></div>
             <div><div class="am-l">Alcance</div><div class="am-v">${N(ad.reach)}</div></div>
             <div><div class="am-l">Impressões</div><div class="am-v">${N(ad.impressions)}</div></div>
             <div><div class="am-l">Cliques</div><div class="am-v">${N(ad.clicks)}</div></div>
@@ -347,13 +615,17 @@ function render(acc, {summary, campaigns, topAds}) {
         </div>
       </div>`).join('');
 
+  const adsHtml = topAds.length === 0
+    ? '<p class="no-data">Sem dados de anúncios no período.</p>'
+    : top1Html + (otherAdsHtml ? `<div class="section-divider"><span>🍧</span></div>${otherAdsHtml}` : '');
+
   const insCards = [
-    {ico:'🏆', label:'Melhor anúncio',         name:best?.ad_name||'—',     value:BRL(best?.spend)},
-    {ico:'👆', label:'Maior vol. de cliques',   name:topClk?.ad_name||'—',  value:`${N(topClk?.clicks)} cliques`},
-    {ico:'👥', label:'Maior alcance',            name:topRch?.ad_name||'—',  value:`${N(topRch?.reach)} pessoas`},
-    {ico:'👁️', label:'Mais impressões',         name:topImp?.ad_name||'—',  value:`${N(topImp?.impressions)} imp.`},
+    {ico:'🏆', bg:'ico-bg-gold',   label:'Melhor anúncio',        name:best?.ad_name||'—',    value:BRL(best?.spend)},
+    {ico:'👆', bg:'ico-bg-blue',   label:'Maior vol. de cliques',  name:topClk?.ad_name||'—', value:`${N(topClk?.clicks)} cliques`},
+    {ico:'👥', bg:'ico-bg-green',  label:'Maior alcance',          name:topRch?.ad_name||'—', value:`${N(topRch?.reach)} pessoas`},
+    {ico:'👁️', bg:'ico-bg-purple', label:'Mais impressões',        name:topImp?.ad_name||'—', value:`${N(topImp?.impressions)} imp.`},
   ].map(c=>`<div class="ins-card">
-    <div class="ins-ico">${c.ico}</div>
+    <div class="ins-ico-wrap ${c.bg}">${c.ico}</div>
     <div class="ins-label">${c.label}</div>
     <div class="ins-name" title="${c.name}">${c.name}</div>
     <div class="ins-value">${c.value}</div>
@@ -362,18 +634,20 @@ function render(acc, {summary, campaigns, topAds}) {
   document.getElementById('dashPage').innerHTML = `
   <div id="exportTarget">
     <div class="dash-header">
-      <div class="deco-circle"></div>
+      <div class="hdr-deco-ring"></div>
+      <div class="hdr-deco-ring2"></div>
       <div class="h-brand">
         <div class="h-brand-box">
+          <span class="h-brand-ico">🍦</span>
           <div>
             <div class="h-brand-name">BERRY'S</div>
-            <div class="h-brand-sub">ICE CREAM</div>
+            <div class="h-brand-sub">Iced Food</div>
           </div>
         </div>
       </div>
       <div class="h-title">Dashboard</div>
-      <div class="h-sub">Meta Ads — Berry's</div>
-      <div class="h-unit">| ${acc.name.toUpperCase()}</div>
+      <div class="h-sub">Meta Ads Performance</div>
+      <div class="h-unit">${acc.name.toUpperCase()}</div>
       <div class="h-pills">
         <span class="date-pill">📅 ${dateLabel()}</span>
         <span class="live-pill"><span class="dot"></span> Dados em tempo real</span>
@@ -381,19 +655,40 @@ function render(acc, {summary, campaigns, topAds}) {
       <img class="mascot" src="./mascote-berrys.png" alt="" onerror="this.style.display='none'">
     </div>
     <div class="kpi-grid">
-      <div class="kpi-card"><div class="kpi-icon ki-money">💰</div><div class="kpi-label">Investimento</div><div class="kpi-value">${BRL(summary.spend)}</div></div>
-      <div class="kpi-card"><div class="kpi-icon ki-reach">👥</div><div class="kpi-label">Alcance</div><div class="kpi-value">${N(summary.reach)}</div></div>
-      <div class="kpi-card"><div class="kpi-icon ki-eye">👁️</div><div class="kpi-label">Impressões</div><div class="kpi-value">${N(summary.impressions)}</div></div>
+      <div class="kpi-card kc-money">
+        <div class="kpi-icon-wrap ki-money">💰</div>
+        <div class="kpi-label">Investimento</div>
+        <div class="kpi-value">${BRL(summary.spend)}</div>
+      </div>
+      <div class="kpi-card kc-reach">
+        <div class="kpi-icon-wrap ki-reach">👥</div>
+        <div class="kpi-label">Alcance</div>
+        <div class="kpi-value">${N(summary.reach)}</div>
+      </div>
+      <div class="kpi-card kc-eye">
+        <div class="kpi-icon-wrap ki-eye">👁️</div>
+        <div class="kpi-label">Impressões</div>
+        <div class="kpi-value">${N(summary.impressions)}</div>
+      </div>
     </div>
     <div class="section">
-      <div class="sec-title">📣 Campanhas veiculadas</div>
+      <div class="sec-title">
+        <div class="sec-title-ico ico-bg-blue">📣</div>
+        Campanhas veiculadas
+      </div>
       ${campsHtml}
     </div>
     <div class="section">
-      <div class="sec-title">∞ Resumo da conta Meta Ads</div>
+      <div class="sec-title">
+        <div class="sec-title-ico" style="background:linear-gradient(135deg,#DBEAFE,#BFDBFE)">∞</div>
+        Resumo da conta Meta Ads
+      </div>
       <div class="meta-row">
-        <div class="meta-logo">∞</div>
-        <div><div class="meta-info-label">Meta Ads</div><div class="meta-info-name">Berry's | ${acc.name}</div></div>
+        <div class="meta-logo">f</div>
+        <div>
+          <div class="meta-info-label">Meta Ads</div>
+          <div class="meta-info-name">Berry's | ${acc.name}</div>
+        </div>
       </div>
       <div class="resumo-grid">
         <div><div class="rg-label">Investimento</div><div class="rg-value">${BRL(summary.spend)}</div></div>
@@ -403,15 +698,25 @@ function render(acc, {summary, campaigns, topAds}) {
       </div>
     </div>
     <div class="section">
-      <div class="sec-title">🏆 Melhores anúncios</div>
+      <div class="sec-title">
+        <div class="sec-title-ico ico-bg-gold">🏆</div>
+        Melhores anúncios
+      </div>
       ${adsHtml}
     </div>
     ${topAds.length > 0 ? `
     <div class="section">
-      <div class="sec-title">⚡ Insights rápidos</div>
+      <div class="sec-title">
+        <div class="sec-title-ico ico-bg-pink">⚡</div>
+        Insights rápidos
+      </div>
       <div class="ins-grid">${insCards}</div>
     </div>` : ''}
-    <p class="foot-note">Relatório referente ao período de ${dateLabel()}.</p>
+    <div class="dash-footer">
+      <div class="foot-brand">🍦 Berry's Iced Food</div>
+      <div class="foot-tagline">"A gente quer sabor. A gente quer Berry's."</div>
+      <div class="foot-meta">Relatório gerado com dados de Meta Ads · ${acc.name}</div>
+    </div>
   </div>`;
 }
 
@@ -421,7 +726,7 @@ async function exportImage() {
   const btn = document.getElementById('btnExport');
   btn.disabled = true; btn.textContent = '⏳ Gerando imagem…';
   try {
-    const canvas = await html2canvas(el, { scale:2.5, useCORS:true, backgroundColor:'#dde6f5', logging:false });
+    const canvas = await html2canvas(el, { scale:2.5, useCORS:true, backgroundColor:'#D4EEF8', logging:false });
     const link = document.createElement('a');
     link.download = `berrys_${ACCOUNTS[activeTab].name.replace(/\s+/g,'_')}_meta_ads.png`;
     link.href = canvas.toDataURL('image/png');
