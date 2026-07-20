@@ -72,6 +72,9 @@ body {
   transition: transform .15s, box-shadow .15s;
 }
 .btn-connect:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,99,214,.45); }
+.btn-connect:disabled { opacity: .55; cursor: default; transform: none; }
+.btn-bulk { background: var(--green); box-shadow: 0 4px 14px rgba(22,163,74,.35); margin-left: auto; }
+.btn-bulk:hover { box-shadow: 0 6px 20px rgba(22,163,74,.45); }
 
 /* ── TABS ── */
 .tabs-wrap {
@@ -271,8 +274,7 @@ body {
 <body>
 
 <div class="setup-bar">
-  <label>Token:</label>
-  <input type="password" id="tokenInput" placeholder="Cole o Access Token do Meta Ads…" />
+  <label>Período:</label>
   <select id="datePreset" onchange="reloadTab()">
     <option value="this_month">Mês atual</option>
     <option value="last_month">Mês anterior</option>
@@ -280,23 +282,25 @@ body {
     <option value="last_30d">Últimos 30 dias</option>
     <option value="this_year">Este ano</option>
   </select>
-  <button class="btn-connect" onclick="connect()">Conectar</button>
+  <button class="btn-connect" onclick="reloadTab()">Atualizar</button>
+  <button class="btn-connect btn-bulk" id="btnBulk" onclick="exportAllUnits()">Baixar todas as unidades</button>
 </div>
 
 <div class="tabs-wrap" id="tabsWrap"></div>
 
 <div class="page" id="dashPage">
   <div class="state-box">
-    <div class="state-ico"></div>
-    <p>Cole o <strong>Access Token</strong> da Meta acima<br>e clique em <strong>Conectar</strong> para carregar<br>os dados da unidade.</p>
+    <div class="spinner"></div>
+    <p>Carregando dados…</p>
   </div>
 </div>
 
-<div class="export-wrap" id="exportWrap" style="display:none">
+<div class="export-wrap" id="exportWrap">
   <button class="btn-export" id="btnExport" onclick="exportImage()"> Exportar como imagem</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
 /* ── BRAND ASSETS (base64) ── */
 const LOGO = "‹LOGO_BASE64›";      /* ← no arquivo real: data:image/png;base64,… (logo preta) */
@@ -379,7 +383,7 @@ const ACCOUNTS = [
   { id: '898087053113777',   name: 'Pirapora' },
   { id: '718790137924927',   name: 'Conquista' },
   { id: '505755245757325',   name: 'Porto Seguro' },
-  { id: '5326782910767622',  name: 'Uberaba' },
+  { id: '2056137371779479',  name: 'Uberaba' },
   { id: '1185830483132999',  name: 'Januária' },
   { id: '1675046163715555',  name: 'Salinas' },
   { id: '1512851600567325',  name: 'Contagem' },
@@ -388,19 +392,21 @@ const ACCOUNTS = [
   { id: '547206184401772',   name: 'Anápolis' },
   { id: '1572310324316523',  name: 'Goiânia Alto da Glória' },
   { id: '930248282851717',   name: 'Lauro de Freitas' },
-  { id: '1228370282243542',  name: 'Salvador Rua' },
+  { id: '1228370282243542',  name: 'Salvador' },
   { id: '364524186711060',   name: 'Balneário' },
   { id: '1715718849282094',  name: 'Feira de Santana' },
   { id: '477466964832908',   name: 'Águas Claras' },
-  { id: '668267178630065',   name: 'Cuiabá' },
-  { id: '3059066484235266',  name: 'Patos de Minas' },
   { id: '875643981579212',   name: 'Indaiatuba' },
-  { id: '1143194000455806',  name: 'Foz do Iguaçu' },
-  { id: '2350525475462622',  name: 'Foz do Iguaçu 02' },
+  { id: '648499830908887',   name: 'Bernardo' },
+  { id: '2571185629974578',  name: 'Savassi 02' },
+  { id: '973653235719636',   name: 'Praia do Francês' },
+  { id: '1665359047899564',  name: 'BH Castelo' },
+  { id: '807970628972520',   name: 'Governador Valadares' },
+  { id: '1462162855666666',  name: 'ParkShopping Campo Grande' },
+  { id: '1299333372282697',  name: 'Shopping Jardins Aracaju' },
 ];
 
-const GRAPH = 'https://graph.facebook.com/v20.0';
-let token = '', activeTab = 0;
+let activeTab = 0;
 const cache = {};
 
 function buildTabs() {
@@ -413,22 +419,15 @@ function switchTab(i) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById(`tab${i}`).classList.add('active');
   activeTab = i;
-  if (token) loadData(i);
-}
-function connect() {
-  token = document.getElementById('tokenInput').value.trim();
-  if (!token) { alert('Cole o Access Token antes de conectar.'); return; }
-  Object.keys(cache).forEach(k => delete cache[k]);
-  document.getElementById('exportWrap').style.display = 'block';
-  loadData(activeTab);
+  loadData(i);
 }
 function reloadTab() {
   Object.keys(cache).forEach(k => delete cache[k]);
-  if (token) loadData(activeTab);
+  loadData(activeTab);
 }
 async function gql(path, params={}) {
-  const url = new URL(`${GRAPH}/${path}`);
-  url.searchParams.set('access_token', token);
+  const url = new URL('/api/meta', window.location.origin);
+  url.searchParams.set('path', path);
   for (const [k,v] of Object.entries(params)) url.searchParams.set(k,v);
   const r = await fetch(url);
   const d = await r.json();
@@ -511,12 +510,16 @@ function setError(msg) {
   document.getElementById('dashPage').innerHTML =
     `<div class="state-box"><div class="state-ico">${IC.cone}</div>
      <div class="err-box">${msg}</div>
-     <p style="font-size:12px;font-weight:600">Verifique o token e a permissão <code>ads_read</code>.</p></div>`;
+     <p style="font-size:12px;font-weight:600">Verifique a variável <code>TOKEN_META</code> no Vercel e a permissão <code>ads_read</code>.</p></div>`;
 }
 
 const RB = ['rb-1','rb-2','rb-3'];
 
-function render(acc, {summary, campaigns, topAds}) {
+function render(acc, data) {
+  document.getElementById('dashPage').innerHTML = buildReport(acc, data);
+}
+
+function buildReport(acc, {summary, campaigns, topAds}) {
   const best   = topAds[0]||null;
   const topClk = [...topAds].sort((a,b)=>Number(b.clicks||0)-Number(a.clicks||0))[0];
   const topRch = [...topAds].sort((a,b)=>Number(b.reach||0)-Number(a.reach||0))[0];
@@ -624,7 +627,7 @@ function render(acc, {summary, campaigns, topAds}) {
       <div class="sec-title"><div class="sec-ico">${IC.bag}</div><span class="sec-pill">Vendas / Delivery</span></div>
       <div class="sales-grid">${salesCards}</div>
     </div>` : '';
-  document.getElementById('dashPage').innerHTML = `
+  return `
   <div id="exportTarget">
     ${SHEET_BLOBS}
     <div class="dash-header">
@@ -725,10 +728,60 @@ async function exportImage() {
   btn.disabled = false; btn.innerHTML = IC.cam + ' Exportar como imagem';
 }
 
-/* boot: inject static icons */
-document.querySelector('.state-ico').innerHTML = IC.cone;
+async function exportAllUnits() {
+  const btn = document.getElementById('btnBulk');
+  const preset = document.getElementById('datePreset').value;
+  const original = btn.textContent;
+  btn.disabled = true;
+
+  const offscreen = document.createElement('div');
+  offscreen.className = 'page';
+  offscreen.style.cssText = 'position:fixed; left:-99999px; top:0; padding:0;';
+  document.body.appendChild(offscreen);
+
+  const zip = new JSZip();
+  const failed = [];
+
+  for (let i = 0; i < ACCOUNTS.length; i++) {
+    const acc = ACCOUNTS[i];
+    btn.textContent = `Baixando ${i+1}/${ACCOUNTS.length} — ${acc.name}…`;
+    try {
+      const key = `${acc.id}_${preset}`;
+      if (!cache[key]) cache[key] = await fetchAll(acc, preset);
+      offscreen.innerHTML = buildReport(acc, cache[key]);
+      await new Promise(r => setTimeout(r, 80));
+      const el = offscreen.querySelector('#exportTarget');
+      const canvas = await html2canvas(el, { scale:2, useCORS:true, backgroundColor:'#EEF6FE', logging:false });
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      zip.file(`berrys_${acc.name.replace(/\s+/g,'_')}_meta_ads.png`, blob);
+    } catch (e) {
+      failed.push(acc.name);
+      console.error(`Falha em ${acc.name}:`, e.message);
+    }
+  }
+
+  document.body.removeChild(offscreen);
+
+  if (Object.keys(zip.files).length === 0) {
+    alert('Não foi possível gerar nenhuma imagem. Verifique o token e tente novamente.');
+  } else {
+    btn.textContent = 'Compactando arquivo…';
+    const content = await zip.generateAsync({ type: 'blob' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(content);
+    link.download = `berrys_relatorios_${preset}.zip`;
+    link.click();
+    if (failed.length) alert(`Concluído com falhas em: ${failed.join(', ')}`);
+  }
+
+  btn.disabled = false;
+  btn.textContent = original;
+}
+
+/* boot: inject static icons and auto-load first unit (token comes from server env) */
 document.getElementById('btnExport').innerHTML = IC.cam + ' Exportar como imagem';
 buildTabs();
+loadData(activeTab);
 </script>
 </body>
 </html>
