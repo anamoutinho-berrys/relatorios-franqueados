@@ -36,9 +36,10 @@
 body {
   font-family: 'Montserrat', 'Segoe UI', sans-serif;
   background:
-    radial-gradient(1100px 520px at -10% -8%, var(--blob) 0%, transparent 55%),
-    radial-gradient(900px 480px at 110% -6%, var(--blob2) 0%, transparent 55%),
-    #F4F9FE;
+    radial-gradient(1200px 560px at -8% -6%, var(--blob) 0%, transparent 55%),
+    radial-gradient(1000px 520px at 108% -4%, var(--blob2) 0%, transparent 55%),
+    radial-gradient(1000px 520px at 50% 118%, var(--blob) 0%, transparent 55%),
+    #EEF6FE;
   background-attachment: fixed;
   min-height: 100vh;
   color: var(--ink);
@@ -88,91 +89,105 @@ body {
 .tab:hover { color: var(--blue); }
 .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
 
-/* ── PAGE ── */
-.page { max-width: 460px; margin: 0 auto; padding: 20px 14px 40px; }
+/* ── PAGE (web sheet) ── */
+.page { max-width: 1120px; margin: 0 auto; padding: 30px 22px 50px; }
+#exportTarget {
+  position: relative; background: var(--white); border-radius: 34px;
+  padding: 34px 34px 22px; overflow: hidden;
+  box-shadow: 0 24px 70px rgba(30,99,214,.14); border: 1px solid var(--line);
+}
+/* decorative cow-spot blobs on the sheet corners */
+.sheet-blobs { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+#exportTarget > *:not(.sheet-blobs) { position: relative; z-index: 1; }
 
-/* ── HEADER ── */
+/* ── HEADER / HERO ── */
 .dash-header {
-  background: var(--white); border-radius: 30px; padding: 22px 22px 20px;
-  margin-bottom: 16px; position: relative; overflow: hidden;
-  box-shadow: var(--shadow); border: 1px solid var(--line); min-height: 216px;
+  position: relative; margin-bottom: 26px; padding-bottom: 8px; min-height: 210px;
 }
-.hdr-blobs { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-.hdr-row { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-.hdr-logo { height: 30px; width: auto; display: block; }
-.hdr-bell {
-  width: 38px; height: 38px; border-radius: 12px; background: var(--white);
-  border: 1px solid var(--line); box-shadow: var(--shadow-sm);
-  display: flex; align-items: center; justify-content: center; color: var(--blue);
-}
+.hdr-blobs { display: none; }
+.hdr-row { display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+.hdr-logo { height: 42px; width: auto; display: block; }
+.hdr-bell { display: none; }
 .h-title {
-  position: relative; z-index: 2; color: var(--blue-title);
-  font-size: 33px; font-weight: 900; line-height: .98; letter-spacing: -.5px;
-  max-width: 62%;
+  color: var(--blue-title); font-size: 54px; font-weight: 900;
+  line-height: .96; letter-spacing: -1px; text-transform: uppercase; max-width: 70%;
 }
-.h-sub { position: relative; z-index: 2; margin-top: 10px; font-size: 13.5px; font-weight: 700; color: var(--ink2); max-width: 66%; }
+.h-accent { width: 190px; height: 5px; border-radius: 4px; background: var(--blue); margin: 14px 0 0; }
+.h-sub { margin-top: 14px; font-size: 18px; font-weight: 700; color: var(--ink2); max-width: 72%; }
 .h-sub b { color: var(--blue); font-weight: 800; }
 .h-unit { color: var(--blue-soft); font-weight: 800; }
 .date-pill {
-  position: relative; z-index: 2; margin-top: 16px;
-  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 18px; display: inline-flex; align-items: center; gap: 9px;
   background: var(--white); border: 1.5px solid var(--line);
-  border-radius: 14px; padding: 9px 15px; color: var(--ink); font-size: 12.5px; font-weight: 700;
+  border-radius: 14px; padding: 10px 17px; color: var(--ink); font-size: 13.5px; font-weight: 700;
   box-shadow: var(--shadow-sm);
 }
 .date-pill svg { color: var(--blue); }
 .date-pill .caret { color: var(--ink3); margin-left: 2px; }
+.live-pill {
+  margin-top: 18px; margin-left: 10px; display: inline-flex; align-items: center; gap: 8px;
+  background: #E8F7EE; border: 1.5px solid #BEEBCF; border-radius: 14px;
+  padding: 10px 15px; color: var(--green); font-size: 12.5px; font-weight: 800;
+}
+.live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(22,163,74,.15); }
 .mascot {
-  position: absolute; right: -14px; top: -6px; height: 210px; z-index: 1;
-  filter: drop-shadow(-6px 8px 16px rgba(14,42,87,.16));
+  position: absolute; right: -6px; top: -18px; height: 250px; z-index: 2;
+  filter: drop-shadow(-8px 12px 22px rgba(14,42,87,.18));
   object-fit: contain; pointer-events: none;
 }
 
 /* ── KPI CARDS ── */
-.kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 11px; margin-bottom: 16px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 22px; }
 .kpi-card {
-  background: var(--white); border-radius: 20px; padding: 16px 10px 15px;
+  background: linear-gradient(160deg, var(--ice2), var(--white));
+  border-radius: 22px; padding: 24px 18px 22px;
   text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--line);
 }
 .kpi-ico {
-  width: 46px; height: 46px; border-radius: 50%; background: var(--circle);
-  display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; color: var(--blue);
+  width: 58px; height: 58px; border-radius: 50%; background: var(--circle);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: var(--blue);
 }
-.kpi-label { font-size: 9.5px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; line-height: 1.2; }
-.kpi-value { font-size: 17px; font-weight: 900; color: var(--blue-deep); line-height: 1; }
+.kpi-ico svg { width: 28px; height: 28px; }
+.kpi-label { font-size: 12px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 8px; line-height: 1.2; }
+.kpi-value { font-size: 30px; font-weight: 900; color: var(--blue-deep); line-height: 1; }
+
+/* ── REPORT GRID (web two-column) ── */
+.report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+.report-grid .span-2 { grid-column: 1 / -1; }
+@media (max-width: 780px) { .report-grid { grid-template-columns: 1fr; } }
 
 /* ── SECTION ── */
 .section {
-  background: var(--white); border-radius: var(--r-card); padding: 20px 18px;
-  margin-bottom: 16px; box-shadow: var(--shadow-sm); border: 1px solid var(--line);
+  background: var(--white); border-radius: var(--r-card); padding: 24px 22px;
+  margin-bottom: 0; box-shadow: var(--shadow-sm); border: 1px solid var(--line);
 }
-.sec-title { margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.sec-title { margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
 .sec-ico {
-  width: 38px; height: 38px; border-radius: 12px; background: var(--circle);
+  width: 44px; height: 44px; border-radius: 13px; background: var(--circle);
   display: flex; align-items: center; justify-content: center; color: var(--blue); flex-shrink: 0;
 }
 
 /* ── CAMPAIGNS ── */
-.camp-item { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.camp-item { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .camp-item:first-child { padding-top: 2px; }
 .camp-item:last-child { border-bottom: none; padding-bottom: 2px; }
-.camp-ico { width: 44px; height: 44px; min-width: 44px; border-radius: 13px; background: var(--circle); display: flex; align-items: center; justify-content: center; color: var(--blue); }
+.camp-ico { width: 48px; height: 48px; min-width: 48px; border-radius: 14px; background: var(--circle); display: flex; align-items: center; justify-content: center; color: var(--blue); }
 .camp-main { flex: 1; min-width: 0; }
-.camp-name { font-size: 12.5px; font-weight: 800; color: var(--ink); line-height: 1.3; }
-.camp-sub { font-size: 11px; font-weight: 700; color: var(--blue); margin-top: 2px; }
-.camp-nums { display: flex; gap: 16px; flex-shrink: 0; text-align: right; }
-.cn-l { font-size: 9px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .3px; margin-bottom: 2px; }
-.cn-v { font-size: 13px; font-weight: 900; color: var(--blue-deep); }
-.camp-spend { font-size: 11.5px; font-weight: 800; color: var(--ink2); margin-top: 3px; }
+.camp-name { font-size: 14px; font-weight: 800; color: var(--ink); line-height: 1.3; }
+.camp-sub { font-size: 12px; font-weight: 700; color: var(--blue); margin-top: 2px; }
+.camp-nums { display: flex; gap: 22px; flex-shrink: 0; text-align: right; }
+.cn-l { font-size: 10px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .3px; margin-bottom: 3px; }
+.cn-v { font-size: 15px; font-weight: 900; color: var(--blue-deep); }
+.camp-spend { font-size: 13px; font-weight: 800; color: var(--ink2); margin-top: 3px; }
 
 /* ── META RESUMO ── */
-.meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.meta-logo { width: 44px; height: 44px; border-radius: 13px; flex-shrink: 0; background: linear-gradient(135deg, #0668E1, #0090FF); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 14px rgba(6,104,225,.25); }
-.meta-info-label { font-size: 10px; color: var(--ink3); font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
-.meta-info-name  { font-size: 13.5px; font-weight: 900; color: var(--ink); }
-.resumo-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; background: var(--ice2); border-radius: 16px; padding: 15px 12px; border: 1px solid var(--line); }
-.rg-label { font-size: 8px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: .5px; font-weight: 700; }
-.rg-value { font-size: 12px; font-weight: 900; color: var(--blue-deep); }
+.meta-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.meta-logo { width: 48px; height: 48px; border-radius: 14px; flex-shrink: 0; background: linear-gradient(135deg, #0668E1, #0090FF); display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 14px rgba(6,104,225,.25); }
+.meta-info-label { font-size: 11px; color: var(--ink3); font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+.meta-info-name  { font-size: 15px; font-weight: 900; color: var(--ink); }
+.resumo-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; background: var(--ice2); border-radius: 18px; padding: 20px 16px; border: 1px solid var(--line); }
+.rg-label { font-size: 10px; color: var(--ink3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; font-weight: 700; }
+.rg-value { font-size: 17px; font-weight: 900; color: var(--blue-deep); }
 
 /* ── TOP ADS ── */
 .ad-item { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
@@ -184,20 +199,20 @@ body {
 .ad-thumb { width: 56px; height: 56px; min-width: 56px; border-radius: 14px; object-fit: cover; background: var(--ice); border: 1px solid var(--line); }
 .ad-thumb-ph { width: 56px; height: 56px; min-width: 56px; border-radius: 14px; background: var(--circle2); display: flex; align-items: center; justify-content: center; color: var(--blue-soft); border: 1px solid var(--line); }
 .ad-info { flex: 1; min-width: 0; }
-.ad-name { font-size: 12.5px; font-weight: 800; color: var(--ink); margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ad-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
-.am-l { font-size: 8.5px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .3px; margin-bottom: 2px; }
-.am-v { font-size: 12.5px; font-weight: 900; color: var(--blue-deep); }
+.ad-name { font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ad-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.am-l { font-size: 9.5px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .3px; margin-bottom: 3px; }
+.am-v { font-size: 14px; font-weight: 900; color: var(--blue-deep); }
 .top1-card { background: linear-gradient(135deg, #FFFBF0, #FFF8E8); border: 1.5px solid #FBE3AC; border-radius: 18px; padding: 14px 13px; margin-bottom: 4px; box-shadow: 0 4px 16px rgba(245,158,11,.08); position: relative; }
 .top1-seal { position: absolute; top: -9px; left: 14px; background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #7C3A00; font-size: 8.5px; font-weight: 900; padding: 4px 10px; border-radius: var(--r-pill); box-shadow: 0 2px 8px rgba(245,158,11,.35); letter-spacing: .3px; display: inline-flex; align-items: center; gap: 4px; }
 
 /* ── INSIGHTS ── */
-.ins-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 11px; }
-.ins-card { background: var(--ice2); border-radius: 16px; padding: 15px 14px; border: 1px solid var(--line); }
-.ins-ico { width: 38px; height: 38px; border-radius: 11px; background: var(--white); display: flex; align-items: center; justify-content: center; color: var(--blue); margin-bottom: 10px; box-shadow: var(--shadow-sm); }
-.ins-label { font-size: 9px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
-.ins-name { font-size: 10.5px; font-weight: 700; color: var(--ink2); margin-bottom: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ins-value { font-size: 16px; font-weight: 900; color: var(--blue); }
+.ins-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+.ins-card { background: var(--ice2); border-radius: 18px; padding: 18px 16px; border: 1px solid var(--line); }
+.ins-ico { width: 44px; height: 44px; border-radius: 12px; background: var(--white); display: flex; align-items: center; justify-content: center; color: var(--blue); margin-bottom: 12px; box-shadow: var(--shadow-sm); }
+.ins-label { font-size: 10.5px; color: var(--ink3); font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.ins-name { font-size: 12.5px; font-weight: 700; color: var(--ink2); margin-bottom: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ins-value { font-size: 21px; font-weight: 900; color: var(--blue); }
 
 /* ── DIVIDER ── */
 .section-divider { display: flex; align-items: center; gap: 10px; margin: 6px 0 4px; }
@@ -206,19 +221,20 @@ body {
 
 /* ── FOOTER ── */
 .dash-footer {
-  position: relative; overflow: hidden; border-radius: 22px; margin-top: 4px;
+  position: relative; overflow: hidden; border-radius: 22px; margin-top: 22px;
   background: linear-gradient(135deg, #1E63D6 0%, #1748A8 100%);
-  padding: 22px 20px 20px; text-align: center;
+  padding: 28px 26px 26px; text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
 }
 .foot-wave { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; display: block; z-index: 0; }
-.foot-inner { position: relative; z-index: 2; }
-.foot-ico { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.16); display: inline-flex; align-items: center; justify-content: center; color: white; margin-bottom: 10px; }
-.foot-tagline { color: white; font-size: 14.5px; font-weight: 800; font-style: italic; margin-bottom: 6px; }
+.foot-inner { position: relative; z-index: 2; display: flex; align-items: center; gap: 14px; }
+.foot-ico { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,.16); display: inline-flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
+.foot-tagline { color: white; font-size: 18px; font-weight: 800; font-style: italic; }
 .foot-tagline b { font-weight: 900; }
-.foot-meta { color: rgba(255,255,255,.72); font-size: 9.5px; font-weight: 600; letter-spacing: .4px; text-transform: uppercase; }
+.foot-meta { position: relative; z-index: 2; color: rgba(255,255,255,.72); font-size: 11px; font-weight: 600; letter-spacing: .4px; text-transform: uppercase; margin-left: auto; }
 
 /* ── EXPORT ── */
-.export-wrap { max-width: 460px; margin: 0 auto; padding: 0 14px 50px; }
+.export-wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px 50px; }
 .btn-export {
   background: var(--navy); color: white; border: none; padding: 16px; border-radius: 16px;
   font-size: 14px; font-weight: 800; cursor: pointer; width: 100%;
@@ -239,16 +255,17 @@ body {
 .err-box { background: #FFF0F0; border: 1.5px solid #FCA5A5; border-radius: 14px; padding: 14px; color: #DC2626; font-size: 13px; margin: 14px 0; font-weight: 700; }
 .no-data { color: var(--ink3); font-size: 13px; text-align: center; padding: 16px 0; font-weight: 600; }
 
-.sec-pill { display:inline-flex; align-items:center; background: var(--blue); color:#fff; font-size:13px; font-weight:800; letter-spacing:.4px; text-transform:uppercase; padding:8px 15px; border-radius:100px; line-height:1; box-shadow:0 4px 12px rgba(30,99,214,.28); }
-.sales-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
-.stat-card { background:var(--ice2); border:1px solid var(--line); border-radius:16px; padding:13px 6px 12px; text-align:center; }
-.stat-ico { width:38px;height:38px;border-radius:50%;background:var(--circle);color:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 8px; }
-.stat-ico svg{ width:20px;height:20px; }
-.stat-label { font-size:8.5px;color:var(--ink3);font-weight:700;text-transform:uppercase;letter-spacing:.2px;margin-bottom:6px;line-height:1.2;min-height:20px;display:flex;align-items:center;justify-content:center; }
-.stat-value { font-size:13.5px;font-weight:900;color:var(--blue-deep);line-height:1; }
+.sec-pill { display:inline-flex; align-items:center; background: var(--blue); color:#fff; font-size:15px; font-weight:800; letter-spacing:.4px; text-transform:uppercase; padding:10px 18px; border-radius:100px; line-height:1; box-shadow:0 4px 12px rgba(30,99,214,.28); }
+.sales-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; }
+.stat-card { background:var(--ice2); border:1px solid var(--line); border-radius:18px; padding:18px 8px 16px; text-align:center; }
+.stat-ico { width:46px;height:46px;border-radius:50%;background:var(--circle);color:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 11px; }
+.stat-ico svg{ width:24px;height:24px; }
+.stat-label { font-size:10px;color:var(--ink3);font-weight:700;text-transform:uppercase;letter-spacing:.2px;margin-bottom:8px;line-height:1.2;min-height:24px;display:flex;align-items:center;justify-content:center; }
+.stat-value { font-size:17px;font-weight:900;color:var(--blue-deep);line-height:1; }
 .stat-card.hl { background:linear-gradient(135deg,#E9F1FF,#DBEAFC); border-color:#C5DCF8; }
 .stat-card.hl .stat-value{ color:var(--blue); }
-@media (max-width:400px){ .sales-grid{ grid-template-columns:repeat(2,1fr);} }
+@media (max-width:900px){ .sales-grid{ grid-template-columns:repeat(3,1fr);} }
+@media (max-width:520px){ .sales-grid{ grid-template-columns:repeat(2,1fr);} .h-title{ font-size:38px; } .mascot{ height:160px; } }
 </style>
 </head>
 <body>
@@ -327,6 +344,26 @@ const HDR_BLOBS = `<svg class="hdr-blobs" viewBox="0 0 460 216" preserveAspectRa
   <g fill="#E7F1FD">
     <ellipse cx="430" cy="30" rx="34" ry="24"/>
     <ellipse cx="388" cy="70" rx="16" ry="12"/>
+  </g>
+</svg>`;
+
+/* cow-spot decorative blobs for the whole web sheet corners (top-left + bottom) */
+const SHEET_BLOBS = `<svg class="sheet-blobs" viewBox="0 0 1120 1400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#DCEBFB" opacity="0.9">
+    <ellipse cx="20" cy="30" rx="70" ry="52"/>
+    <ellipse cx="110" cy="96" rx="34" ry="26"/>
+    <ellipse cx="6" cy="150" rx="30" ry="40"/>
+    <ellipse cx="88" cy="16" rx="26" ry="18"/>
+  </g>
+  <g fill="#E7F1FD">
+    <ellipse cx="1104" cy="40" rx="66" ry="46"/>
+    <ellipse cx="1030" cy="104" rx="30" ry="22"/>
+  </g>
+  <g fill="#DCEBFB" opacity="0.85">
+    <ellipse cx="60" cy="1388" rx="80" ry="54"/>
+    <ellipse cx="170" cy="1360" rx="34" ry="24"/>
+    <ellipse cx="1060" cy="1384" rx="76" ry="50"/>
+    <ellipse cx="960" cy="1360" rx="30" ry="22"/>
   </g>
 </svg>`;
 
@@ -583,21 +620,24 @@ function render(acc, {summary, campaigns, topAds}) {
   ];
   const salesCards = _sc.filter(c=>c.show).map(c=>`<div class="stat-card${c.hl?' hl':''}"><div class="stat-ico">${c.ico}</div><div class="stat-label">${c.label}</div><div class="stat-value">${c.val}</div></div>`).join('');
   const salesHtml = isDelivery ? `
-    <div class="section">
+    <div class="section" style="margin-bottom:18px">
       <div class="sec-title"><div class="sec-ico">${IC.bag}</div><span class="sec-pill">Vendas / Delivery</span></div>
       <div class="sales-grid">${salesCards}</div>
     </div>` : '';
   document.getElementById('dashPage').innerHTML = `
   <div id="exportTarget">
+    ${SHEET_BLOBS}
     <div class="dash-header">
-      ${HDR_BLOBS}
       <div class="hdr-row">
         <img class="hdr-logo" src="${LOGO}" alt="Berry's">
-        <div class="hdr-bell">${IC.bell}</div>
       </div>
       <div class="h-title">Relatório de Meta Ads</div>
+      <div class="h-accent"></div>
       <div class="h-sub">Meta Ads — <b>Berry's</b> <span class="h-unit">| ${acc.name.toUpperCase()}</span></div>
-      <div class="date-pill">${IC.cal} ${dateLabel()} <span class="caret">${IC.caret}</span></div>
+      <div>
+        <span class="date-pill">${IC.cal} ${dateLabel()}</span>
+        <span class="live-pill"><span class="live-dot"></span> Dados em tempo real</span>
+      </div>
       <img class="mascot" src="${heroMascot}" alt="" onerror="this.style.display='none'">
     </div>
 
@@ -620,38 +660,41 @@ function render(acc, {summary, campaigns, topAds}) {
     </div>
 
     ${salesHtml}
-    <div class="section">
-      <div class="sec-title"><div class="sec-ico">${IC.mega}</div><span class="sec-pill">Campanhas ativas</span></div>
-      ${campsHtml}
-    </div>
 
-    <div class="section">
-      <div class="sec-title"><div class="sec-ico">${IC.infinity}</div><span class="sec-pill">Resumo da conta Meta Ads</span></div>
-      <div class="meta-row">
-        <div class="meta-logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V7c0-.9.4-1.3 1.3-1.3H17V2.7h-2.5c-2.7 0-3.8 1.4-3.8 3.9v1.9H9v3h1.7V22H14v-10.5h2.4l.4-3H14Z"/></svg></div>
-        <div>
-          <div class="meta-info-label">Meta Ads</div>
-          <div class="meta-info-name">Berry's | ${acc.name}</div>
+    <div class="report-grid">
+      <div class="section span-2">
+        <div class="sec-title"><div class="sec-ico">${IC.mega}</div><span class="sec-pill">Campanhas veiculadas</span></div>
+        ${campsHtml}
+      </div>
+
+      <div class="section${topAds.length > 0 ? '' : ' span-2'}">
+        <div class="sec-title"><div class="sec-ico">${IC.trophy}</div><span class="sec-pill">Melhores anúncios</span></div>
+        ${adsHtml}
+      </div>
+
+      ${topAds.length > 0 ? `
+      <div class="section">
+        <div class="sec-title"><div class="sec-ico">${IC.bolt}</div><span class="sec-pill">Insights rápidos</span></div>
+        <div class="ins-grid">${insCards}</div>
+      </div>` : ''}
+
+      <div class="section span-2">
+        <div class="sec-title"><div class="sec-ico">${IC.infinity}</div><span class="sec-pill">Resumo da conta Meta Ads</span></div>
+        <div class="meta-row">
+          <div class="meta-logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V7c0-.9.4-1.3 1.3-1.3H17V2.7h-2.5c-2.7 0-3.8 1.4-3.8 3.9v1.9H9v3h1.7V22H14v-10.5h2.4l.4-3H14Z"/></svg></div>
+          <div>
+            <div class="meta-info-label">Meta Ads</div>
+            <div class="meta-info-name">Berry's | ${acc.name}</div>
+          </div>
+        </div>
+        <div class="resumo-grid">
+          <div><div class="rg-label">Investimento</div><div class="rg-value">${BRL(summary.spend)}</div></div>
+          <div><div class="rg-label">Alcance</div><div class="rg-value">${N(summary.reach)}</div></div>
+          <div><div class="rg-label">Impressões</div><div class="rg-value">${N(summary.impressions)}</div></div>
+          <div><div class="rg-label">Período</div><div class="rg-value" style="font-size:13px">${periodShort()}</div></div>
         </div>
       </div>
-      <div class="resumo-grid">
-        <div><div class="rg-label">Investimento</div><div class="rg-value">${BRL(summary.spend)}</div></div>
-        <div><div class="rg-label">Alcance</div><div class="rg-value">${N(summary.reach)}</div></div>
-        <div><div class="rg-label">Impressões</div><div class="rg-value">${N(summary.impressions)}</div></div>
-        <div><div class="rg-label">Período</div><div class="rg-value" style="font-size:10px">${periodShort()}</div></div>
-      </div>
     </div>
-
-    <div class="section">
-      <div class="sec-title"><div class="sec-ico">${IC.trophy}</div><span class="sec-pill">Melhores anúncios</span></div>
-      ${adsHtml}
-    </div>
-
-    ${topAds.length > 0 ? `
-    <div class="section">
-      <div class="sec-title"><div class="sec-ico">${IC.bolt}</div><span class="sec-pill">Insights rápidos</span></div>
-      <div class="ins-grid">${insCards}</div>
-    </div>` : ''}
 
     <div class="dash-footer">
       <svg class="foot-wave" viewBox="0 0 460 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -661,8 +704,8 @@ function render(acc, {summary, campaigns, topAds}) {
       <div class="foot-inner">
         <div class="foot-ico">${IC.cone}</div>
         <div class="foot-tagline">"A gente quer sabor. A gente quer <b>Berry's</b>."</div>
-        <div class="foot-meta">Relatório gerado com dados de Meta Ads · ${acc.name}</div>
       </div>
+      <div class="foot-meta">Dados de Meta Ads · ${acc.name}</div>
     </div>
   </div>`;
 }
@@ -673,7 +716,7 @@ async function exportImage() {
   const btn = document.getElementById('btnExport');
   btn.disabled = true; btn.textContent = 'Gerando imagem…';
   try {
-    const canvas = await html2canvas(el, { scale:2.5, useCORS:true, backgroundColor:'#F4F9FE', logging:false });
+    const canvas = await html2canvas(el, { scale:2.5, useCORS:true, backgroundColor:'#EEF6FE', logging:false });
     const link = document.createElement('a');
     link.download = `berrys_${ACCOUNTS[activeTab].name.replace(/\s+/g,'_')}_meta_ads.png`;
     link.href = canvas.toDataURL('image/png');
