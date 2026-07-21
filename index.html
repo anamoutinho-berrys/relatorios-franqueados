@@ -507,10 +507,14 @@ function setLoading(name) {
     `<div class="state-box"><div class="spinner"></div><p>Carregando dados de<br><strong>${name}</strong>…</p></div>`;
 }
 function setError(msg) {
+  const isTokenIssue = /cannot parse access token|invalid oauth access token|não configurad|espaços/i.test(msg);
+  const hint = isTokenIssue
+    ? 'O valor de <code>TOKEN_META</code> no Vercel parece inválido. Gere um novo token de sistema (long-lived) em Business Settings → System Users, cole-o na variável <code>TOKEN_META</code> (Project Settings → Environment Variables) sem aspas ou espaços extras, e faça um novo deploy.'
+    : 'Verifique a variável <code>TOKEN_META</code> no Vercel e a permissão <code>ads_read</code>.';
   document.getElementById('dashPage').innerHTML =
     `<div class="state-box"><div class="state-ico">${IC.cone}</div>
      <div class="err-box">${msg}</div>
-     <p style="font-size:12px;font-weight:600">Verifique a variável <code>TOKEN_META</code> no Vercel e a permissão <code>ads_read</code>.</p></div>`;
+     <p style="font-size:12px;font-weight:600">${hint}</p></div>`;
 }
 
 const RB = ['rb-1','rb-2','rb-3'];
